@@ -18,10 +18,32 @@ module Symbiont
       raise Symbiont::Errors::NoTitleForDefinition
     end
 
+    def no_url_is_provided
+      puts "\nERROR".on_red
+      puts "You called a '#{retrieve_method(caller)}' action but the definition #{self.class} does not have a url_is assertion.".cyan
+      raise Symbiont::Errors::NoUrlForDefinition
+    end
+
+    def no_url_matches_is_provided
+      puts "\nERROR".on_red
+      puts "You called a '#{retrieve_method(caller)}' action but the definition #{self.class} does not have a url_matches assertion.".cyan
+      raise Symbiont::Errors::NoUrlMatchForDefinition
+    end
+
+    def no_title_is_provided
+      puts "\nERROR".on_red
+      puts "You called a '#{retrieve_method(caller)}' action but the definition #{self.class} does not have a title_is assertion.".cyan
+      raise Symbiont::Errors::NoTitleForDefinition
+    end
+
     private
 
     def retrieve_class(caller)
       caller[1][/`.*'/][8..-3]
+    end
+
+    def retrieve_method(caller)
+      caller[0][/`.*'/][1..-2]
     end
   end
 end

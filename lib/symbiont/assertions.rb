@@ -17,5 +17,17 @@ module Symbiont
       title_is_empty if title.nil? or title.empty?
       @title = title
     end
+    
+    def url
+      @url
+    end
+
+    def url_match
+      @url_match
+    end
+
+    def title
+      @title
+    end
   end
 end

@@ -6,6 +6,8 @@ include RSpec::Matchers
 
 require 'symbiont'
 
+#========================================
+
 class Practice
   attach Symbiont
 
@@ -18,3 +20,6 @@ end
 @page.should be_a_kind_of(Symbiont)
 @page.should be_an_instance_of(Practice)
 
+@page.view
+@page.has_correct_url?
+@page.has_correct_title?

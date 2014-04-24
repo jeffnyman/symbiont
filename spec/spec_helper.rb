@@ -21,3 +21,7 @@ RSpec.configure do |config|
     $stdout = original_stdout
   end
 end
+
+Dir['spec/fixtures/**/*.rb'].each do |file|
+  require file.sub(/spec\//, '')
+end
