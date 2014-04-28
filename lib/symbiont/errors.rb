@@ -3,5 +3,6 @@ module Symbiont
     class NoUrlForDefinition < StandardError; end
     class NoUrlMatchForDefinition < StandardError; end
     class NoTitleForDefinition < StandardError; end
+    class UnableToCreatePlatform < StandardError; end
   end
 end

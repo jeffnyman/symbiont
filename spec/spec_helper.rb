@@ -22,9 +22,14 @@ RSpec.configure do |config|
   end
 
   shared_context :page do
-    let(:watir_browser)    { mock_browser_for_watir }
-    let(:watir_definition) { ValidPage.new(watir_browser) }
-    let(:empty_definition) { PageWithMissingAssertions.new(watir_browser) }
+    let(:watir_browser)        { mock_browser_for_watir }
+    let(:selenium_browser)     { mock_browser_for_selenium }
+
+    let(:watir_definition)     { ValidPage.new(watir_browser) }
+    let(:selenium_definition)  { ValidPage.new(selenium_browser) }
+
+    let(:empty_definition)     { PageWithMissingAssertions.new(watir_browser) }
+    let(:no_driver_definition) { ValidPage.new(:unknown) }
   end
 end
 

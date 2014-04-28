@@ -5,6 +5,7 @@ require 'rspec'
 include RSpec::Matchers
 
 require 'watir-webdriver'
+require 'selenium-webdriver'
 
 require 'symbiont'
 
@@ -18,7 +19,8 @@ class Practice
   title_is 'Dialogic - Practice Page'
 end
 
-driver = Watir::Browser.new
+driver = Selenium::WebDriver::Driver.for :firefox
+#driver = Watir::Browser.new
 
 @page = Practice.new(driver)
 @page.should be_a_kind_of(Symbiont)

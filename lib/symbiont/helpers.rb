@@ -36,6 +36,12 @@ module Symbiont
       raise Symbiont::Errors::NoTitleForDefinition
     end
 
+    def unable_to_create_platform(driver)
+      puts "\nERROR".on_red
+      puts "Unable to create a platform object for #{driver}.".cyan
+      raise Symbiont::Errors::UnableToCreatePlatform
+    end
+
     private
 
     def retrieve_class(caller)
