@@ -11,24 +11,70 @@ require 'symbiont'
 
 #========================================
 
+class Dialogic
+  attach Symbiont
+
+  url_is 'http://localhost:9292'
+end
+
+class Weight
+  attach Symbiont
+
+  url_is 'http://localhost:9292/weight'
+
+  text_field :weight,    id: 'wt', index: 0
+  button     :calculate, id: 'calculate'
+end
+
 class Practice
   attach Symbiont
 
   url_is 'http://localhost:9292/practice'
   url_matches /:\d{4}/
   title_is 'Dialogic - Practice Page'
+
+  link :view_in_frame, id: 'framed_page'
+
+  iframe :boxframe, class: 'fancybox-iframe'
+
+  text_field :weight, -> { boxframe.text_field(id: 'wt') }
+
+  article :practice, id: 'practice'
+
+  a :page_link do |text|
+    practice.a(text: text)
+  end
 end
 
-driver = Selenium::WebDriver::Driver.for :firefox
-#driver = Watir::Browser.new
+#driver = Selenium::WebDriver::Driver.for :firefox
+@driver = Watir::Browser.new
 
-@page = Practice.new(driver)
-@page.should be_a_kind_of(Symbiont)
-@page.should be_an_instance_of(Practice)
+def non_framed
+  @page = Weight.new(@driver)
+  @page.view
+  @page.weight.set '200'
+  @page.calculate.click
+end
 
-@page.view
-@page.has_correct_url?
-@page.has_correct_title?
+def framed
+  @page = Practice.new(@driver)
+  @page.view
+  #@page.view_in_frame.click
+  @page.page_link('View Weight Calculator in Frame').click
+  @page.weight.set '200'
+end
 
-@page.should have_correct_url
-@page.should have_correct_title
+def basic
+  @page = Practice.new(@driver)  
+  @page.should be_a_kind_of(Symbiont)
+  @page.should be_an_instance_of(Practice)
+
+  @page.view
+  @page.has_correct_url?
+  @page.has_correct_title?
+
+  @page.should have_correct_url
+  @page.should have_correct_title
+end
+
+basic

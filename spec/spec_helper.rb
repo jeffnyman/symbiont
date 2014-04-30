@@ -21,6 +21,8 @@ RSpec.configure do |config|
     $stdout = original_stdout
   end
 
+  config.alias_it_should_behave_like_to :provides_an, 'when providing an'
+
   shared_context :page do
     let(:watir_browser)        { mock_browser_for_watir }
     let(:selenium_browser)     { mock_browser_for_selenium }
@@ -30,6 +32,10 @@ RSpec.configure do |config|
 
     let(:empty_definition)     { PageWithMissingAssertions.new(watir_browser) }
     let(:no_driver_definition) { ValidPage.new(:unknown) }
+  end
+
+  shared_context :element do
+    let(:watir_element) { double('element') }
   end
 end
 

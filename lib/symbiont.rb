@@ -8,6 +8,8 @@ require 'colorize'
 require 'symbiont/platform'
 require 'symbiont/assertions'
 require 'symbiont/pages'
+require 'symbiont/elements'
+require 'symbiont/accessor'
 
 module Symbiont
   include Platform
@@ -15,7 +17,10 @@ module Symbiont
   # @param caller [Class] the class including the framework
   def self.included(caller)
     caller.extend Symbiont::Assertion
+    caller.extend Symbiont::Element
+    
     caller.send :include, Symbiont::Page
+    caller.send :include, Symbiont::Accessor
 
     Symbiont.trace("#{caller.class} #{caller} has attached the Symbiont.")
   end
