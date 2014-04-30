@@ -5,7 +5,6 @@ require 'rspec'
 include RSpec::Matchers
 
 require 'watir-webdriver'
-require 'selenium-webdriver'
 
 require 'symbiont'
 
@@ -46,7 +45,6 @@ class Practice
   end
 end
 
-#driver = Selenium::WebDriver::Driver.for :firefox
 @driver = Watir::Browser.new
 
 def non_framed
@@ -77,4 +75,4 @@ def basic
   @page.should have_correct_title
 end
 
-basic
+framed

@@ -4,17 +4,17 @@ module Symbiont
 
     def view
       no_url_is_provided if url.nil?
-      platform.view(url)
+      driver.goto(url)
     end
 
     def has_correct_url?
       no_url_matches_is_provided if url_match.nil?
-      !(platform.url =~ url_match).nil?
+      !(driver.url =~ url_match).nil?
     end
 
     def has_correct_title?
       no_title_is_provided if title.nil?
-      !(platform.title.match(title)).nil?
+      !(driver.title.match(title)).nil?
     end
 
     def url
