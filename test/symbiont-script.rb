@@ -7,6 +7,7 @@ include RSpec::Matchers
 require 'watir-webdriver'
 
 require 'symbiont'
+include Symbiont::Factory
 
 #========================================
 
@@ -23,6 +24,10 @@ class Weight
 
   text_field :weight,    id: 'wt', index: 0
   button     :calculate, id: 'calculate'
+
+  def convert(value)
+    weight.set value
+  end
 end
 
 class Practice
@@ -75,4 +80,18 @@ def basic
   @page.should have_correct_title
 end
 
-basic
+#basic
+
+on_view(Weight)
+on(Weight).convert('200')
+on(Weight).calculate.click
+
+on(Weight) do
+  @active.convert('200')
+  @active.calculate.click
+end
+
+on(Weight) do |page|
+  page.convert('200')
+  page.calculate.click
+end

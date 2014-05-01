@@ -12,6 +12,7 @@ require 'symbiont/assertions'
 require 'symbiont/pages'
 require 'symbiont/elements'
 require 'symbiont/accessor'
+require 'symbiont/factory'
 
 module Symbiont
   include Platform

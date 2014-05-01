@@ -2,6 +2,16 @@ class PageWithMissingAssertions
   attach Symbiont
 end
 
+class TestFactory
+  include Symbiont::Factory
+  attr_accessor :driver
+  attr_accessor :active
+end
+
+class ValidPageNewContext
+  attach Symbiont
+end
+
 class ValidPage
   attach Symbiont
   
