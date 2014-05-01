@@ -1,3 +1,5 @@
+require 'watir-webdriver'
+
 require 'symbiont/version'
 require 'symbiont/logging'
 require 'symbiont/errors'

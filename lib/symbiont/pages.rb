@@ -13,8 +13,8 @@ module Symbiont
     end
 
     def has_correct_title?
-      no_title_is_provided if title.nil?
-      !(driver.title.match(title)).nil?
+      no_title_is_provided if page_title.nil?
+      !(driver.title.match(page_title)).nil?
     end
 
     def url
@@ -25,8 +25,8 @@ module Symbiont
       self.class.url_match
     end
 
-    def title
-      self.class.title
+    def page_title
+      self.class.page_title
     end
   end
 end

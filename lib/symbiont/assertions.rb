@@ -26,7 +26,7 @@ module Symbiont
       @url_match
     end
 
-    def title
+    def page_title
       @title
     end
   end

@@ -75,4 +75,4 @@ def basic
   @page.should have_correct_title
 end
 
-framed
+basic

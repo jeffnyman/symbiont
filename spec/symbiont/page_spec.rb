@@ -35,12 +35,12 @@ describe Symbiont::Page do
 
   context 'a page definition being used - title' do
     it 'will establish no default title' do
-      expect(empty_definition.title).to be_nil
+      expect(empty_definition.page_title).to be_nil
     end
 
     it 'will establish a page title with the title_is assertion' do
-      expect(watir_definition).to respond_to :title
-      expect(watir_definition.title).to eq('Dialogic')
+      expect(watir_definition).to respond_to :page_title
+      expect(watir_definition.page_title).to eq('Dialogic')
     end
 
     it 'will not verify a title if the title_is assertion has not been set' do

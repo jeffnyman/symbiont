@@ -1,9 +1,19 @@
 module Symbiont
+  # Calls the Watir module to get a list of the factory methods that
+  # Watir uses to reference and access web objects.
+  #
+  # @return [Array] factory method list
   def self.elements
-    @elements = [:article, :text_field, :button, :a, :link, :iframe]
+    unless @elements
+      @elements = Watir::Container.instance_methods
+    end
+    @elements
   end
 
   module Element
+    # Iterates through Watir factory methods. Each method is defined
+    # as a method that can be called on a page class. This is what
+    # allows element definitions to be created.
     Symbiont.elements.each do |element|
       define_method element do |*signature, &block|
         identifier, locator = parse_signature(signature)
@@ -15,9 +25,9 @@ module Symbiont
     private
 
     # @param identifier [String] friendly name of element definition
-    # @param locator [String] name of Watir-based object
-    # @param element [String] the type of the element
-    # @param block [Object] a context block
+    # @param locator [Array] locators for referencing the element
+    # @param element [String] name of Watir-based object
+    # @param block [Proc] a context block
     #
     # @example
     #   enable, {:id => 'enableForm'}, checkbox
@@ -43,6 +53,9 @@ module Symbiont
 
     # Returns the block or proc that serves as a context for an element
     # definition.
+    #
+    # @param locator [Array] locators from element definition
+    # @param block [Proc] a context block
     def context_from_signature(*locator, &block)
       if block_given?
         block
