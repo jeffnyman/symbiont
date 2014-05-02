@@ -2,7 +2,7 @@
 
 [![Gem Version](https://badge.fury.io/rb/symbiont.svg)](http://badge.fury.io/rb/symbiont)
 [![Build Status](https://secure.travis-ci.org/jnyman/symbiont.png)](http://travis-ci.org/jnyman/symbiont)
-[![Coverage Status](https://coveralls.io/repos/jnyman/symbiont/badge.png)](https://coveralls.io/r/jnyman/symbiont)
+[![Coverage Status](https://coveralls.io/repos/jnyman/symbiont/badge.png?branch=master)](https://coveralls.io/r/jnyman/symbiont?branch=master)
 [![Code Climate](https://codeclimate.com/github/jnyman/symbiont.png)](https://codeclimate.com/github/jnyman/symbiont)
 [![Dependency Status](https://gemnasium.com/jnyman/symbiont.png)](https://gemnasium.com/jnyman/symbiont)
 
@@ -28,7 +28,9 @@ You can also install Symbiont just as you would any other gem:
 
 ## Usage
 
-Instructions on how to use Symbiont will be available as the interface is defined.
+Instructions on how to use Symbiont will be available as the interface is defined. You can check out the [Symbiont test script](https://github.com/jnyman/symbiont/blob/master/test/symbiont-script.rb) for an idea of how the library can be interacted with. Do note that the test script requires a local copy of [Dialogic](https://github.com/jnyman/dialogic) to be running. To execute the test script:
+
+    $ rake test:script
 
 ## Why call it Symbiont?
 
