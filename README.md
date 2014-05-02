@@ -1,6 +1,16 @@
 # Symbiont
 
+[![Gem Version](https://badge.fury.io/rb/symbiont.svg)](http://badge.fury.io/rb/symbiont)
+[![Build Status](https://secure.travis-ci.org/jnyman/symbiont.png)](http://travis-ci.org/jnyman/symbiont)
+[![Coverage Status](https://coveralls.io/repos/jnyman/symbiont/badge.png?branch=master)](https://coveralls.io/r/jnyman/symbiont?branch=master)
+[![Code Climate](https://codeclimate.com/github/jnyman/symbiont.png)](https://codeclimate.com/github/jnyman/symbiont)
+[![Dependency Status](https://gemnasium.com/jnyman/symbiont.png)](https://gemnasium.com/jnyman/symbiont)
+
 Symbiont provides a semantic domain-specific language that can be used to construct a fluent interface for test execution libraries. The initial focus will be on using the [watir-webdriver](https://github.com/watir/watir-webdriver) API as the underlying driver library.
+
+[![Gitter chat](https://badges.gitter.im/jnyman/symbiont.png)](https://gitter.im/jnyman/symbiont)
+[![endorse](https://api.coderwall.com/jnyman/endorsecount.png)](https://coderwall.com/jnyman)
+
 
 ## Installation
 
@@ -18,7 +28,9 @@ You can also install Symbiont just as you would any other gem:
 
 ## Usage
 
-Instructions on how to use Symbiont will be available as the interface is defined.
+Instructions on how to use Symbiont will be available as the interface is defined. You can check out the [Symbiont test script](https://github.com/jnyman/symbiont/blob/master/test/symbiont-script.rb) for an idea of how the library can be interacted with. Do note that the test script requires a local copy of [Dialogic](https://github.com/jnyman/dialogic) to be running. To execute the test script:
+
+    $ rake test:script
 
 ## Why call it Symbiont?
 
@@ -38,7 +50,7 @@ So, with that bit of context, think of this library as a facultative, endosymbio
 
 ## Credits
 
-Thanks to Jeff Morgan ([http://www.cheezyworld.com/](http://www.cheezyworld.com/)) for his page-object gem, Alister Scott ([http://watirmelon.com](http://watirmelon.com)) for his watir-page-helper gem, and Nat Ritmeyer ([http://www.natritmeyer.com/](http://www.natritmeyer.com/)) for his SitePrism gem.
+Thanks to Jeff Morgan ([http://www.cheezyworld.com/](http://www.cheezyworld.com/)) for his [page-object](https://github.com/cheezy/page-object) gem, Alister Scott ([http://watirmelon.com](http://watirmelon.com)) for his [watir-page-helper](https://github.com/alisterscott/watir-page-helper) gem, Alex Rodionov ([(http://p0deje.blogspot.com/](http://p0deje.blogspot.com/)) for his [watirsome](https://github.com/p0deje/watirsome) gem, and Nat Ritmeyer ([http://www.natritmeyer.com/](http://www.natritmeyer.com/)) for his [SitePrism](https://github.com/natritmeyer/site_prism/) gem.
 
 ## Copyright
 
