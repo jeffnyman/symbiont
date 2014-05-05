@@ -10,6 +10,14 @@ module Symbiont
     @elements
   end
 
+  def self.settable
+    @settable ||= [:text_field]
+  end
+
+  def self.settable?(element)
+    settable.include? element.to_sym
+  end
+
   module Element
     # Iterates through Watir factory methods. Each method is defined
     # as a method that can be called on a page class. This is what
@@ -19,26 +27,102 @@ module Symbiont
         identifier, locator = parse_signature(signature)
         context = context_from_signature(locator, &block)
         define_element_accessor(identifier, locator, element, &context)
+        define_set_accessor(identifier, locator, element, &context) if Symbiont.settable?(element)
       end
     end
 
     private
 
-    # @param identifier [String] friendly name of element definition
-    # @param locator [Array] locators for referencing the element
-    # @param element [String] name of Watir-based object
+    # Defines an accessor method for an element that allows the friendly
+    # name of the element to be proxied to a Watir element object that
+    # corresponds to the element type.
+    #
+    # @param identifier [Symbol] friendly name of element definition
+    # @param locator [Hash] locators for referencing the element
+    # @param element [Symbol] name of Watir-based object
     # @param block [Proc] a context block
     #
     # @example
-    #   enable, {:id => 'enableForm'}, checkbox
+    # This element definition:
+    #   text_field :weight, id: 'wt', index: 0
+    #
+    # passed in like this:
+    #   :weight, {:id => 'wt', :index => 0}, :text_field
+    #
+    # This allows access like this:
+    #   @page.weight.set '200'
+    #
+    # Access could also be done this way:
+    #   @page.weight(id: 'wt').set '200'
+    #
+    # The second approach would lead to the *values variable having
+    # an array like this: [{:id => 'wt'}].
+    #
+    # A third approach would be to utilize one element definition
+    # within the context of another. Consider the following element
+    # definitions:
+    #   article :practice, id: 'practice'
+    #
+    #   a :page_link do |text|
+    #     practice.a(text: text)
+    #   end
+    #
+    # These could be utilized as such:
+    #   on_view(Practice).page_link('Click Me').click
+    #
+    # This approach would lead to the *values variable having
+    # an array like this: ["Click Me"].
     def define_element_accessor(identifier, locator, element, &block)
+      #puts "* Define Element Accessor"
+      #puts "** Identifier: #{identifier} (#{identifier.class})"
+      #puts "** Locator: #{locator} (#{locator.class})"
+      #puts "** Element: #{element} (#{element.class})"
+
       define_method "#{identifier}".to_sym do |*values|
-        #puts "*** *values: #{values}"
+        puts "*** *values: #{values} (#{values.class})"
 
         if block_given?
           instance_exec(*values, &block)
         else
           reference_element(element, locator)
+        end
+      end
+    end
+
+    # Defines an accessor method for an element that allows the value of
+    # the element to be set via appending an "=" to the friendly name
+    # (identifier) of the element passed in.
+    #
+    # @param identifier [Symbol] friendly name of element definition
+    # @param locator [Hash] locators for referencing the element
+    # @param element [Symbol] name of Watir-based object
+    # @param block [Proc] a context block
+    #
+    # @example
+    # This element definition:
+    #   text_field :weight, id: 'wt'
+    #
+    # Can be accessed in two ways:
+    #    @page.weight.set '200'
+    #    @page.weight = '200'
+    #
+    # The second approach would lead to the *values variable having
+    # an array like this: ['200']. The first approach would be
+    # handled by define_element_accessor instead.
+    def define_set_accessor(identifier, locator, element, &block)
+      define_method "#{identifier}=".to_sym do |*values|
+        puts "*** *values: #{values}"
+
+        accessor = if block_given?
+          instance_exec(&block)
+        else
+          reference_element(element, locator)
+        end
+
+        if accessor.respond_to?(:set)
+          accessor.set *values
+        else
+          accessor.send_keys *values
         end
       end
     end
@@ -56,6 +140,7 @@ module Symbiont
     #
     # @param locator [Array] locators from element definition
     # @param block [Proc] a context block
+    # @return [Proc] the context block or nil if there is no procedure
     def context_from_signature(*locator, &block)
       if block_given?
         block

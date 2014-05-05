@@ -62,9 +62,11 @@ end
 def framed
   @page = Practice.new(@driver)
   @page.view
-  #@page.view_in_frame.click
+  ##@page.view_in_frame.click
   @page.page_link('View Weight Calculator in Frame').click
   @page.weight.set '200'
+
+  ##on_view(Practice).page_link('View Weight Calculator in Frame').click
 end
 
 def basic
@@ -80,18 +82,20 @@ def basic
   @page.should have_correct_title
 end
 
-#basic
+def factory
+  on_view(Weight)
+  on(Weight).convert('200')
+  on(Weight).calculate.click
 
-on_view(Weight)
-on(Weight).convert('200')
-on(Weight).calculate.click
+  on(Weight) do
+    @active.convert('200')
+    @active.calculate.click
+  end
 
-on(Weight) do
-  @active.convert('200')
-  @active.calculate.click
+  on(Weight) do |page|
+    page.convert('200')
+    page.calculate.click
+  end
 end
 
-on(Weight) do |page|
-  page.convert('200')
-  page.calculate.click
-end
+framed
