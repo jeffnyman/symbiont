@@ -128,5 +128,27 @@ describe Symbiont::Page do
       watir_definition.refresh_page
       watir_definition.refresh
     end
+
+    it 'will be able to handle JavaScript alert dialogs' do
+      watir_browser.should_receive(:alert).exactly(3).times.and_return(watir_browser)
+      watir_browser.should_receive(:exists?).and_return(true)
+      watir_browser.should_receive(:text)
+      watir_browser.should_receive(:ok)
+      watir_definition.will_alert {}
+    end
+
+    it 'will be able to handle JavaScript confirmation dialogs' do
+      watir_browser.should_receive(:alert).exactly(3).times.and_return(watir_browser)
+      watir_browser.should_receive(:exists?).and_return(true)
+      watir_browser.should_receive(:text)
+      watir_browser.should_receive(:ok)
+      watir_definition.will_confirm(true) {}
+    end
+
+    it 'will be able to handle JavaScript prompt dialogs' do
+      watir_browser.should_receive(:wd).twice.and_return(watir_browser)
+      watir_browser.should_receive(:execute_script).twice
+      watir_definition.will_prompt('Testing') {}
+    end
   end
 end

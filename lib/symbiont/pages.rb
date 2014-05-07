@@ -74,6 +74,44 @@ module Symbiont
       driver.refresh
     end
 
+    # @param block [Proc] the code that generates the alert
+    # @return [String] the message contained in the alert message box
+    def will_alert(&block)
+      yield
+      value = nil
+      if driver.alert.exists?
+        value = driver.alert.text
+        driver.alert.ok
+      end
+      value
+    end
+
+    # @param response [Boolean] true to accept the confirmation, false to cancel it
+    # @param block [Proc] the code that generates the confirmation
+    # @return [String] the message contained in the confirmation message box
+    def will_confirm(response, &block)
+      yield
+      value = nil
+      if driver.alert.exists?
+        value = driver.alert.text
+        response ? driver.alert.ok : driver.alert.close
+      end
+      value
+    end
+
+    # @param response [String] the value to be used in the prompt
+    # @param block [Proc] the code that generates the prompt
+    # @return [Hash] :message for the prompt message, :default_value for
+    # the value that the prompt had before the response was applied
+    def will_prompt(response, &block)
+      cmd = "window.prompt = function(text, value) {window.__lastWatirPrompt = {message: text, default_value: value}; return '#{response}';}"
+      driver.wd.execute_script(cmd)
+      yield
+      result = driver.wd.execute_script('return window.__lastWatirPrompt')
+      result && result.dup.each_key { |k| result[k.to_sym] = result.delete(k) }
+      result
+    end
+
     alias_method :current_url, :url
     alias_method :page_url, :url
     alias_method :html, :markup

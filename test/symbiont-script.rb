@@ -15,6 +15,18 @@ class Dialogic
   attach Symbiont
 
   url_is 'http://localhost:9292'
+
+  p          :login_form, id: 'open'
+  text_field :username,   id: 'username'
+  text_field :password,   id: 'password'
+  button     :login,      id: 'login-button'
+
+  def login_as_admin
+    login_form.click
+    username.set 'admin'
+    password.set 'admin'
+    login.click
+  end
 end
 
 class Weight
@@ -36,6 +48,10 @@ class Practice
   url_is 'http://localhost:9292/practice'
   url_matches /:\d{4}/
   title_is 'Dialogic - Practice Page'
+
+  button :alert,   id: 'alertButton'
+  button :confirm, id: 'confirmButton'
+  button :prompt,  id: 'promptButton'
 
   link :view_in_frame, id: 'framed_page'
 
@@ -110,4 +126,28 @@ def factory
   end
 end
 
-basic
+#basic
+
+@page = Dialogic.new(@driver)
+@page.view
+@page.login_as_admin
+
+@page = Practice.new(@driver)
+@page.view
+
+response = @page.will_alert { @page.alert.click }
+expect(response).to eq 'Alert Message Received'
+
+response = @page.will_confirm(false) { @page.confirm.click }
+expect(response).to eq 'Confirmation Message Received'
+
+response = @page.will_prompt("magenta") { @page.prompt.click }
+expect(response[:message]).to eq('Favorite Color')
+expect(response[:default_value]).to eq('blue')
+
+@page = Weight.new(@driver)
+@page.view
+
+Watir::Wait.until { @page.weight.exists? }
+
+@page.weight.when_present.set '200'
