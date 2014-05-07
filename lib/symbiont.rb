@@ -1,7 +1,6 @@
 require 'watir-webdriver'
 
 require 'symbiont/version'
-require 'symbiont/logging'
 require 'symbiont/errors'
 require 'symbiont/helpers'
 
@@ -31,6 +30,10 @@ module Symbiont
     caller.send :include, Symbiont::Accessor
 
     Symbiont.trace("#{caller.class} #{caller} has attached the Symbiont.")
+  end
+
+  def self.trace(message, level = 1)
+    puts '*' * level + " #{message}" if ENV['SYMBIONT_TRACE'] == 'on'
   end
 
   # @return [Object] browser driver reference
