@@ -80,6 +80,18 @@ def basic
 
   @page.should have_correct_url
   @page.should have_correct_title
+
+  expect(@page.url).to eq('http://localhost:9292/practice')
+  @page.markup.include?('<strong id="group">Apocalypticists Unite</strong>').should be_true
+  @page.text.include?('LEAST FAVORITE WAY').should be_true
+  expect(@page.title).to eq('Dialogic - Practice Page')
+
+  script = <<-JS
+    return arguments[0].innerHTML
+  JS
+
+  result = @page.run_script(script, @page.view_in_frame)
+  expect(result).to eq('View Weight Calculator in Frame')
 end
 
 def factory
@@ -98,4 +110,4 @@ def factory
   end
 end
 
-framed
+basic

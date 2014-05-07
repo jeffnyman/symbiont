@@ -18,7 +18,7 @@ module Symbiont
       @title = title
     end
     
-    def url
+    def asserted_url
       @url
     end
 
@@ -26,7 +26,7 @@ module Symbiont
       @url_match
     end
 
-    def page_title
+    def asserted_title
       @title
     end
   end

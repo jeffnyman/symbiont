@@ -73,14 +73,7 @@ module Symbiont
     # This approach would lead to the *values variable having
     # an array like this: ["Click Me"].
     def define_element_accessor(identifier, locator, element, &block)
-      #puts "* Define Element Accessor"
-      #puts "** Identifier: #{identifier} (#{identifier.class})"
-      #puts "** Locator: #{locator} (#{locator.class})"
-      #puts "** Element: #{element} (#{element.class})"
-
       define_method "#{identifier}".to_sym do |*values|
-        puts "*** *values: #{values} (#{values.class})"
-
         if block_given?
           instance_exec(*values, &block)
         else

@@ -7,7 +7,6 @@ require 'symbiont/helpers'
 
 require 'colorize'
 
-#require 'symbiont/platform'
 require 'symbiont/assertions'
 require 'symbiont/pages'
 require 'symbiont/elements'
@@ -15,8 +14,14 @@ require 'symbiont/accessor'
 require 'symbiont/factory'
 
 module Symbiont
-  #include Platform
   
+  # The included callback is used to provide the core functionality of the
+  # library to any class or module that includes the Symbiont library. The
+  # calling class or module is extended with logic that the library makes
+  # available as class methods. Any such class or module becomes a page or
+  # activity definition. The class methods allow assertions and element
+  # defintions to be defined.
+  #
   # @param caller [Class] the class including the framework
   def self.included(caller)
     caller.extend Symbiont::Assertion
