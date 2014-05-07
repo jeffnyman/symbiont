@@ -43,6 +43,9 @@ module Symbiont
   def initialize(driver)
     Symbiont.trace("Dialect attached to driver:\n\t#{driver.inspect}")
     @driver = driver
+
+    initialize_page if respond_to?(:initialize_page)
+    initialize_activity if respond_to?(:initialize_activity)
   end
 end
 
