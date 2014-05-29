@@ -1,5 +1,16 @@
 require 'spec_helper'
 
+describe 'Symbiont Driver' do
+  include_context :page
+
+  context 'a symbiont driver is requested' do
+    it 'will provide the default browser' do
+      Watir::Browser.should_receive(:new).once.and_return(watir_browser)
+      symbiont_driver
+    end
+  end
+end
+
 describe 'Page Definitions' do
   include_context :page
 

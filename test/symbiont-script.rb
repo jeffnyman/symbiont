@@ -70,8 +70,6 @@ class Practice
   end
 end
 
-@driver = Watir::Browser.new
-
 def non_framed
   @page = Weight.new(@driver)
   @page.view
@@ -148,6 +146,8 @@ def wait_state
 end
 
 #basic
+
+symbiont_driver
 
 @page = Dialogic.new(@driver)
 @page.view
