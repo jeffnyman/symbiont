@@ -5,5 +5,6 @@ describe Symbiont::Element do
   include_context :element
 
   provides_an 'element generator for', %w{text_field button}
-  provides_an 'element set generator for', %w{text_field}
+  provides_an 'element set generator for', %w{text_field file_field textarea}
+  provides_an 'element select generator for', %w{select_list}
 end
