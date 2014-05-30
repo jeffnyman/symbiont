@@ -41,7 +41,7 @@ module Symbiont
 
   # @param driver [Object] a tool driver instance
   def initialize(driver)
-    Symbiont.trace("Dialect attached to driver:\n\t#{driver.inspect}")
+    Symbiont.trace("Symbiont attached to driver:\n\t#{driver.inspect}")
     @driver = driver
 
     initialize_page if respond_to?(:initialize_page)
@@ -53,6 +53,6 @@ def attach(mod=Symbiont)
   include mod
 end
 
-def symbiont_driver(driver='firefox')
-  @driver = Watir::Browser.new driver.to_sym
+def symbiont_driver(driver=:firefox)
+  @driver = Watir::Browser.new driver
 end
