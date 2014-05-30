@@ -6,7 +6,7 @@ describe 'Symbiont Driver' do
   context 'a symbiont driver is requested' do
     it 'will provide the default browser' do
       Watir::Browser.should_receive(:new).once.and_return(watir_browser)
-      symbiont_driver
+      symbiont_browser
     end
   end
 end

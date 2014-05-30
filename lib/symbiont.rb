@@ -53,6 +53,8 @@ def attach(mod=Symbiont)
   include mod
 end
 
-def symbiont_driver(driver=:firefox)
-  @driver = Watir::Browser.new driver
+def symbiont_browser(browser=:firefox)
+  @driver = Watir::Browser.new browser
 end
+
+alias :symbiont_browser_for :symbiont_browser
