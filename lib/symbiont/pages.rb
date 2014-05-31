@@ -17,6 +17,11 @@ module Symbiont
       !(driver.title.match(asserted_title)).nil?
     end
 
+    def verified?
+      has_correct_url?
+      has_correct_title?
+    end
+
     def asserted_url
       self.class.asserted_url
     end

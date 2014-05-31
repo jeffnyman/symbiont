@@ -50,6 +50,12 @@ describe Symbiont::Page do
   end
 
   context 'an instance of a page definition' do
+    it 'will be able to verify a page' do
+      watir_browser.should_receive(:title).and_return('Dialogic')
+      watir_browser.should_receive(:url).and_return('http://localhost:9292')
+      watir_definition.verified?
+    end
+
     it 'will be able to get the active url' do
       watir_browser.should_receive(:url).exactly(3).times.and_return('http://localhost:9292')
       expect(watir_definition).to respond_to :url
