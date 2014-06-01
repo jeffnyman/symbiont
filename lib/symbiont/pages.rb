@@ -5,6 +5,7 @@ module Symbiont
     def view
       no_url_is_provided if asserted_url.nil?
       driver.goto(asserted_url)
+      self
     end
 
     def has_correct_url?
