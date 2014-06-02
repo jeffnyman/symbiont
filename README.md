@@ -28,7 +28,9 @@ You can also install Symbiont just as you would any other gem:
 
 ## Usage
 
-Instructions on how to use Symbiont will be available as the interface is defined. You can check out the [Symbiont test script](https://github.com/jnyman/symbiont/blob/master/test/symbiont-script.rb) for an idea of how the library can be interacted with. Do note that the test script requires a local copy of [Dialogic](https://github.com/jnyman/dialogic) to be running. To execute the test script:
+To learn how to use the framework, you can check out my [blog posts on Symbiont](http://testerstories.com/category/symbiont/).
+
+You can check out the [Symbiont test script](https://github.com/jnyman/symbiont/blob/master/test/symbiont-script.rb) for an idea of how the library can be interacted with. Do note that the test script requires a local copy of [Dialogic](https://github.com/jnyman/dialogic) to be running. To execute the test script:
 
     $ rake test:script
 
