@@ -21,6 +21,10 @@ module Symbiont
 
       @active = definition.new(@driver)
       @active.view if visit == true
+
+      @active.has_correct_url? if @active.respond_to?(:url_matches)
+      @active.has_correct_title? if @active.respond_to?(:title_is)
+
       block.call @active if block
 
       @active
