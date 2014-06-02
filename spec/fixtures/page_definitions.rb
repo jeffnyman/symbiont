@@ -5,7 +5,7 @@ end
 class TestFactory
   include Symbiont::Factory
   attr_accessor :driver
-  attr_accessor :active
+  attr_accessor :page
 end
 
 class ValidPageNewContext
@@ -19,7 +19,7 @@ class ValidPage
   url_matches /:\d{4}/
   title_is 'Dialogic'
 
-  %w(text_field button).each do |element|
+  %w(text_field button file_field textarea select_list).each do |element|
     send element, :"#{element}", id: element
 
     send element, :"#{element}_proc", proc { driver.send(element, id: element) }

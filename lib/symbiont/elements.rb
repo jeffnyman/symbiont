@@ -11,11 +11,19 @@ module Symbiont
   end
 
   def self.settable
-    @settable ||= [:text_field]
+    @settable ||= [:text_field, :file_field, :textarea]
+  end
+
+  def self.selectable
+    @selectable ||= [:select_list]
   end
 
   def self.settable?(element)
     settable.include? element.to_sym
+  end
+
+  def self.selectable?(element)
+    selectable.include? element.to_sym
   end
 
   module Element
@@ -28,6 +36,7 @@ module Symbiont
         context = context_from_signature(locator, &block)
         define_element_accessor(identifier, locator, element, &context)
         define_set_accessor(identifier, locator, element, &context) if Symbiont.settable?(element)
+        define_select_accessor(identifier, locator, element, &context) if Symbiont.selectable?(element)
       end
     end
 
@@ -104,8 +113,6 @@ module Symbiont
     # handled by define_element_accessor instead.
     def define_set_accessor(identifier, locator, element, &block)
       define_method "#{identifier}=".to_sym do |*values|
-        puts "*** *values: #{values}"
-
         accessor = if block_given?
           instance_exec(&block)
         else
@@ -116,6 +123,36 @@ module Symbiont
           accessor.set *values
         else
           accessor.send_keys *values
+        end
+      end
+    end
+
+    # Defines an accessor method for an element that allows the value of
+    # the element to be selected via appending an "=" to the friendly
+    # name (identifier) of the element passed in.
+    #
+    # @param identifier [Symbol] friendly name of element definition
+    # @param locator [Hash] locators for referencing the element
+    # @param element [Symbol] name of Watir-based object
+    # @param block [Proc] a context block
+    #
+    # @example
+    # This element definition:
+    #   select_list :city, id: 'city'
+    #
+    # Can be accessed in two ways:
+    #    @page.city.select 'Chicago'
+    #    @page.city = 'Chicago'
+    #
+    # The second approach would lead to the *values variable having
+    # an array like this: ['City']. The first approach would be
+    # handled by define_element_accessor instead.
+    def define_select_accessor(identifier, locator, element, &block)
+      define_method "#{identifier}=".to_sym do |*values|
+        if block_given?
+          instance_exec(&block).select *values
+        else
+          reference_element(element, locator).select *values
         end
       end
     end

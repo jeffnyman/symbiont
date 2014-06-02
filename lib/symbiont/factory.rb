@@ -1,6 +1,5 @@
 module Symbiont
   module Factory
-
     # Creates a definition context for actions. If an existing context
     # exists, that context will be re-used.
     #
@@ -9,9 +8,9 @@ module Symbiont
     # @param block [Proc] logic to execute in the context of the definition
     # @return [Object] instance of the definition
     def on(definition, visit=false, &block)
-      if @active.kind_of?(definition)
-        block.call @active if block
-        return @active
+      if @page.kind_of?(definition)
+        block.call @page if block
+        return @page
       end
 
       if @context.kind_of?(definition)
@@ -19,11 +18,15 @@ module Symbiont
         return @context
       end
 
-      @active = definition.new(@driver)
-      @active.view if visit == true
-      block.call @active if block
+      @page = definition.new(@driver)
+      @page.view if visit == true
 
-      @active
+      @page.has_correct_url? if @page.respond_to?(:url_matches)
+      @page.has_correct_title? if @page.respond_to?(:title_is)
+
+      block.call @page if block
+
+      @page
     end
 
     alias_method :on_page, :on
@@ -49,7 +52,7 @@ module Symbiont
     # @param block [Proc] logic to execute in the context of the definition
     # @return [Object] instance of the definition
     def on_new(definition, &block)
-      @active = nil
+      @page = nil
 
       if @context.kind_of?(definition)
         @context = nil
@@ -68,8 +71,8 @@ module Symbiont
     # @return [Object] instance of the definition
     def on_set(definition, &block)
       on(definition, &block)
-      @context = @active
-      @active
+      @context = @page
+      @page
     end
   end
 end

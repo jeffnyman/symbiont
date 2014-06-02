@@ -49,6 +49,10 @@ class Practice
   url_matches /:\d{4}/
   title_is 'Dialogic - Practice Page'
 
+  checkbox :enable_sith_list, id: 'toggleSith'
+  select_list :sith_power, id: 'sith'
+  select_list :physics_concept, id: 'physics'
+
   button :alert,   id: 'alertButton'
   button :confirm, id: 'confirmButton'
   button :prompt,  id: 'promptButton'
@@ -65,8 +69,6 @@ class Practice
     practice.a(text: text)
   end
 end
-
-@driver = Watir::Browser.new
 
 def non_framed
   @page = Weight.new(@driver)
@@ -126,7 +128,26 @@ def factory
   end
 end
 
+def javascript_dialogs
+  response = @page.will_alert { @page.alert.click }
+  expect(response).to eq 'Alert Message Received'
+
+  response = @page.will_confirm(false) { @page.confirm.click }
+  expect(response).to eq 'Confirmation Message Received'
+
+  response = @page.will_prompt("magenta") { @page.prompt.click }
+  expect(response[:message]).to eq('Favorite Color')
+  expect(response[:default_value]).to eq('blue')
+end
+
+def wait_state
+  Watir::Wait.until { @page.weight.exists? }
+  @page.weight.when_present.set '200'
+end
+
 #basic
+
+symbiont_driver
 
 @page = Dialogic.new(@driver)
 @page.view
@@ -134,20 +155,5 @@ end
 
 @page = Practice.new(@driver)
 @page.view
-
-response = @page.will_alert { @page.alert.click }
-expect(response).to eq 'Alert Message Received'
-
-response = @page.will_confirm(false) { @page.confirm.click }
-expect(response).to eq 'Confirmation Message Received'
-
-response = @page.will_prompt("magenta") { @page.prompt.click }
-expect(response[:message]).to eq('Favorite Color')
-expect(response[:default_value]).to eq('blue')
-
-@page = Weight.new(@driver)
-@page.view
-
-Watir::Wait.until { @page.weight.exists? }
-
-@page.weight.when_present.set '200'
+@page.enable_sith_list.set
+@page.sith_power.select 'Sundering Assault'

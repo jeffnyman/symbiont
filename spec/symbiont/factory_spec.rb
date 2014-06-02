@@ -7,63 +7,63 @@ describe Symbiont::Factory do
   end
 
   it 'will create a new definition and view it, using on_view' do
-    @factory.driver.should_receive(:goto)
+    expect(@factory.driver).to receive(:goto)
     @factory.on_view(ValidPage)
   end
 
   it 'will create a new definition and view it, using on_view and a block' do
-    @factory.driver.should_receive(:goto)
+    expect(@factory.driver).to receive(:goto)
     @factory.on_view ValidPage do |page|
-      page.should be_instance_of ValidPage
+      expect(page).to be_instance_of ValidPage
     end
   end
 
   it 'will create a new definition, using on and a block with a parameter' do
-    @factory.driver.should_not_receive(:goto)
+    expect(@factory.driver).not_to receive(:goto)
     @factory.on ValidPage do |page|
-      page.should be_instance_of ValidPage
+      expect(page).to be_instance_of ValidPage
     end
   end
 
   it 'will create a new definition, using on and a block without a parameter' do
-    @factory.driver.should_not_receive(:goto)
+    expect(@factory.driver).not_to receive(:goto)
     @factory.on ValidPage do
-      @factory.active.should be_instance_of ValidPage
+      expect(@factory.page).to be_instance_of ValidPage
     end
   end
 
   it 'will use an existing object reference with on' do
-    @factory.driver.should_receive(:goto)
+    expect(@factory.driver).to receive(:goto)
     obj1 = @factory.on_view ValidPage
     obj2 = @factory.on ValidPage
-    obj1.should == obj2
+    expect(obj1).to be(obj2)
   end
 
   it 'will not use an existing object reference with on_new' do
-    @factory.driver.should_receive(:goto)
+    expect(@factory.driver).to receive(:goto)
     obj1 = @factory.on_view ValidPage
     obj2 = @factory.on_new ValidPage
-    obj1.should_not == obj2
+    expect(obj1).not_to be(obj2)
   end
 
   it 'will create a new definition, using on_set' do
-    @factory.driver.should_not_receive(:goto)
+    expect(@factory.driver).not_to receive(:goto)
     @factory.on_set ValidPage do |page|
-      page.should be_instance_of ValidPage
+      expect(page).to be_instance_of ValidPage
     end
   end
 
   it 'will set a reference to be used outside the factory' do
-    active = @factory.on ValidPage
-    current = @factory.instance_variable_get '@active'
-    current.should === active
+    page = @factory.on ValidPage
+    current = @factory.instance_variable_get '@page'
+    expect(current).to be(page)
   end
 
   it 'will use an existing object reference with on_set' do
-    @factory.driver.should_receive(:goto)
+    expect(@factory.driver).to receive(:goto)
     obj1 = @factory.on_view ValidPage
     obj2 = @factory.on_set ValidPage
-    obj1.should == obj2
+    expect(obj1).to be(obj2)
   end
 
   it 'will use an existing context using on after using on_set' do
@@ -79,8 +79,8 @@ describe Symbiont::Factory do
       @obj3 = page  # obj1 CONTEXT is still set
     end
 
-    @obj1.should_not == @obj2
-    @obj1.should == @obj3
+    expect(@obj1).not_to be(@obj2)
+    expect(@obj1).to be(@obj3)
   end
 
   it 'will use an existing context using on_new of a different class after using on_set' do
@@ -96,8 +96,8 @@ describe Symbiont::Factory do
       @obj3 = page  # CONTEXT is set to obj1
     end
 
-    @obj1.should_not == @obj2
-    @obj1.should == @obj3
+    expect(@obj1).not_to be(@obj2)
+    expect(@obj1).to be (@obj3)
   end
 
   it 'will clear existing context using on_new after using on_set' do
@@ -109,6 +109,6 @@ describe Symbiont::Factory do
       @obj2 = page   # ACTIVE nil; since page is same, CONTEXT is nil
     end
 
-    @obj1.should_not == @obj2
+    expect(@obj1).not_to be(@obj2)
   end
 end
