@@ -28,7 +28,7 @@ describe Symbiont::Factory do
   it 'will create a new definition, using on and a block without a parameter' do
     @factory.driver.should_not_receive(:goto)
     @factory.on ValidPage do
-      @factory.active.should be_instance_of ValidPage
+      @factory.page.should be_instance_of ValidPage
     end
   end
 
@@ -54,9 +54,9 @@ describe Symbiont::Factory do
   end
 
   it 'will set a reference to be used outside the factory' do
-    active = @factory.on ValidPage
-    current = @factory.instance_variable_get '@active'
-    current.should === active
+    page = @factory.on ValidPage
+    current = @factory.instance_variable_get '@page'
+    current.should === page
   end
 
   it 'will use an existing object reference with on_set' do

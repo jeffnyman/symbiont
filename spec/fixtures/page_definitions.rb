@@ -5,7 +5,7 @@ end
 class TestFactory
   include Symbiont::Factory
   attr_accessor :driver
-  attr_accessor :active
+  attr_accessor :page
 end
 
 class ValidPageNewContext
