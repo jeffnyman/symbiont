@@ -19,7 +19,6 @@ namespace :spec do
     options  = %w(--color)
     options += %w(--format documentation)
     options += %w(--format html --out spec/reports/symbiont-test-report.html)
-    options += %w(--format nested --out spec/reports/symbiont-test-report.txt)
 
     config.rspec_opts = options
   end
