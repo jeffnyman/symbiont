@@ -6,6 +6,7 @@ module Symbiont
   def self.elements
     unless @elements
       @elements = Watir::Container.instance_methods
+      #@elements.delete(:extract_selector)
     end
     @elements
   end

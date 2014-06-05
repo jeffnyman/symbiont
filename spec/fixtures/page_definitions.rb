@@ -19,7 +19,7 @@ class ValidPage
   url_matches /:\d{4}/
   title_is 'Dialogic'
 
-  %w(text_field button file_field textarea select_list).each do |element|
+  %w(text_field button file_field textarea select_list checkbox).each do |element|
     send element, :"#{element}", id: element
 
     send element, :"#{element}_proc", proc { driver.send(element, id: element) }
