@@ -12,7 +12,9 @@ require 'symbiont/elements'
 require 'symbiont/accessor'
 require 'symbiont/factory'
 
+require 'symbiont/data_reader'
 require 'symbiont/data_setter'
+require 'symbiont/data_builder'
 
 module Symbiont
   # The included callback is used to provide the core functionality of the
@@ -31,6 +33,7 @@ module Symbiont
     caller.send :include, Symbiont::Accessor
 
     caller.send :include, Symbiont::DataSetter
+    caller.send :include, Symbiont::DataBuilder
 
     Symbiont.trace("#{caller.class} #{caller} has attached the Symbiont.")
   end
