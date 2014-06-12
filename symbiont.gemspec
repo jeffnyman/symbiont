@@ -40,13 +40,13 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rspec', '>= 3.0'
 
   spec.add_runtime_dependency 'colorize', '>= 0.7.2'
-  spec.add_runtime_dependency 'watir-webdriver', '>= 0.6.9'
+  spec.add_runtime_dependency 'watir-webdriver', '>= 0.6.10'
 
   spec.post_install_message = %{
-    (::) (::) (::) (::) (::) (::) (::) (::) (::) (::) (::) (::)
+(::) (::) (::) (::) (::) (::) (::) (::) (::) (::) (::) (::)
 
-      Symbiont #{Symbiont::VERSION} has been installed.
+  Symbiont #{Symbiont::VERSION} has been installed.
 
-    (::) (::) (::) (::) (::) (::) (::) (::) (::) (::) (::) (::)
+(::) (::) (::) (::) (::) (::) (::) (::) (::) (::) (::) (::)
   }
 end
