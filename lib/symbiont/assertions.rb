@@ -17,7 +17,7 @@ module Symbiont
       title_is_empty if title.nil? or title.empty?
       @title = title
     end
-    
+
     def asserted_url
       @url
     end

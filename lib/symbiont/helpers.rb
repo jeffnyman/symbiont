@@ -1,5 +1,8 @@
 module Symbiont
   module Helpers
+
+    private
+
     def url_is_empty
       puts "\nERROR".on_red
       puts "The url_is assertion is empty on the definition #{retrieve_class(caller)}.".cyan
@@ -35,8 +38,6 @@ module Symbiont
       puts "You called a '#{retrieve_method(caller)}' action but the definition #{self.class} does not have a title_is assertion.".cyan
       raise Symbiont::Errors::NoTitleForDefinition
     end
-
-    private
 
     def retrieve_class(caller)
       caller[1][/`.*'/][8..-3]
