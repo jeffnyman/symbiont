@@ -18,7 +18,7 @@ module Symbiont
         return @context
       end
 
-      @page = definition.new(@driver)
+      @page = definition.new(@browser)
       @page.view if visit == true
 
       @page.has_correct_url? if @page.respond_to?(:url_matches)

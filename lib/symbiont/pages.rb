@@ -4,18 +4,18 @@ module Symbiont
 
     def view
       no_url_is_provided if asserted_url.nil?
-      driver.goto(asserted_url)
+      browser.goto(asserted_url)
       self
     end
 
     def has_correct_url?
       no_url_matches_is_provided if url_match.nil?
-      !(driver.url =~ url_match).nil?
+      !(browser.url =~ url_match).nil?
     end
 
     def has_correct_title?
       no_title_is_provided if asserted_title.nil?
-      !(driver.title.match(asserted_title)).nil?
+      !(browser.title.match(asserted_title)).nil?
     end
 
     def verified?
@@ -36,35 +36,35 @@ module Symbiont
     end
 
     def url
-      driver.url
+      browser.url
     end
 
     def markup
-      driver.html
+      browser.html
     end
 
     def text
-      driver.text
+      browser.text
     end
 
     def title
-      driver.title
+      browser.title
     end
 
     def visit(url)
-      driver.goto(url)
+      browser.goto(url)
     end
 
     def screenshot(file)
-      driver.wd.save_screenshot(file)
+      browser.wd.save_screenshot(file)
     end
 
     def run_script(script, *args)
-      driver.execute_script(script, *args)
+      browser.execute_script(script, *args)
     end
 
     def get_cookie(name)
-      for cookie in driver.cookies.to_a
+      for cookie in browser.cookies.to_a
         if cookie[:name] == name
           return cookie[:value]
         end
@@ -73,11 +73,11 @@ module Symbiont
     end
 
     def clear_cookies
-      driver.cookies.clear
+      browser.cookies.clear
     end
 
     def refresh
-      driver.refresh
+      browser.refresh
     end
 
     # @param block [Proc] the code that generates the alert
@@ -85,9 +85,9 @@ module Symbiont
     def will_alert(&block)
       yield
       value = nil
-      if driver.alert.exists?
-        value = driver.alert.text
-        driver.alert.ok
+      if browser.alert.exists?
+        value = browser.alert.text
+        browser.alert.ok
       end
       value
     end
@@ -98,9 +98,9 @@ module Symbiont
     def will_confirm(response, &block)
       yield
       value = nil
-      if driver.alert.exists?
-        value = driver.alert.text
-        response ? driver.alert.ok : driver.alert.close
+      if browser.alert.exists?
+        value = browser.alert.text
+        response ? browser.alert.ok : browser.alert.close
       end
       value
     end
@@ -111,9 +111,9 @@ module Symbiont
     # the value that the prompt had before the response was applied
     def will_prompt(response, &block)
       cmd = "window.prompt = function(text, value) {window.__lastWatirPrompt = {message: text, default_value: value}; return '#{response}';}"
-      driver.wd.execute_script(cmd)
+      browser.wd.execute_script(cmd)
       yield
-      result = driver.wd.execute_script('return window.__lastWatirPrompt')
+      result = browser.wd.execute_script('return window.__lastWatirPrompt')
       result && result.dup.each_key { |k| result[k.to_sym] = result.delete(k) }
       result
     end

@@ -43,12 +43,12 @@ module Symbiont
   end
 
   # @return [Object] browser driver reference
-  attr_reader :driver
+  attr_reader :browser
 
   # @param driver [Object] a tool driver instance
   def initialize(driver)
-    Symbiont.trace("Symbiont attached to driver:\n\t#{driver.inspect}")
-    @driver = driver
+    Symbiont.trace("Symbiont attached to browser:\n\t#{driver.inspect}")
+    @browser = driver
 
     initialize_page if respond_to?(:initialize_page)
     initialize_activity if respond_to?(:initialize_activity)
@@ -60,7 +60,7 @@ def attach(mod=Symbiont)
 end
 
 def symbiont_browser(browser=:firefox)
-  @driver = Watir::Browser.new browser
+  @browser = Watir::Browser.new browser
 end
 
 alias :symbiont_browser_for :symbiont_browser
@@ -82,4 +82,9 @@ class Watir::CheckBox
   alias_method :check, :set
   alias_method :uncheck, :clear
   alias_method :checked?, :set?
+end
+
+class Watir::Radio
+  alias_method :choose, :set
+  alias_method :chosen?, :set?
 end

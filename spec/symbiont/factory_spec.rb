@@ -3,51 +3,51 @@ require 'spec_helper'
 describe Symbiont::Factory do
   before(:each) do
     @factory = TestFactory.new
-    @factory.driver = mock_browser_for_watir
+    @factory.browser = mock_browser_for_watir
   end
 
   it 'will create a new definition and view it, using on_view' do
-    expect(@factory.driver).to receive(:goto)
+    expect(@factory.browser).to receive(:goto)
     @factory.on_view(ValidPage)
   end
 
   it 'will create a new definition and view it, using on_view and a block' do
-    expect(@factory.driver).to receive(:goto)
+    expect(@factory.browser).to receive(:goto)
     @factory.on_view ValidPage do |page|
       expect(page).to be_instance_of ValidPage
     end
   end
 
   it 'will create a new definition, using on and a block with a parameter' do
-    expect(@factory.driver).not_to receive(:goto)
+    expect(@factory.browser).not_to receive(:goto)
     @factory.on ValidPage do |page|
       expect(page).to be_instance_of ValidPage
     end
   end
 
   it 'will create a new definition, using on and a block without a parameter' do
-    expect(@factory.driver).not_to receive(:goto)
+    expect(@factory.browser).not_to receive(:goto)
     @factory.on ValidPage do
       expect(@factory.page).to be_instance_of ValidPage
     end
   end
 
   it 'will use an existing object reference with on' do
-    expect(@factory.driver).to receive(:goto)
+    expect(@factory.browser).to receive(:goto)
     obj1 = @factory.on_view ValidPage
     obj2 = @factory.on ValidPage
     expect(obj1).to be(obj2)
   end
 
   it 'will not use an existing object reference with on_new' do
-    expect(@factory.driver).to receive(:goto)
+    expect(@factory.browser).to receive(:goto)
     obj1 = @factory.on_view ValidPage
     obj2 = @factory.on_new ValidPage
     expect(obj1).not_to be(obj2)
   end
 
   it 'will create a new definition, using on_set' do
-    expect(@factory.driver).not_to receive(:goto)
+    expect(@factory.browser).not_to receive(:goto)
     @factory.on_set ValidPage do |page|
       expect(page).to be_instance_of ValidPage
     end
@@ -60,7 +60,7 @@ describe Symbiont::Factory do
   end
 
   it 'will use an existing object reference with on_set' do
-    expect(@factory.driver).to receive(:goto)
+    expect(@factory.browser).to receive(:goto)
     obj1 = @factory.on_view ValidPage
     obj2 = @factory.on_set ValidPage
     expect(obj1).to be(obj2)
