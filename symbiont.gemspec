@@ -41,6 +41,7 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency 'colorize', '~> 0.7'
   spec.add_runtime_dependency 'watir-webdriver', '~> 0.6'
+  spec.add_runtime_dependency 'watir-dom-wait'
 
   spec.post_install_message = %{
 (::) (::) (::) (::) (::) (::) (::) (::) (::) (::) (::) (::)
