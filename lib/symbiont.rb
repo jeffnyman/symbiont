@@ -6,6 +6,9 @@ require 'symbiont/helpers'
 
 require 'colorize'
 
+require 'symbiont/watir/browser'
+require 'symbiont/watir/scroll'
+
 require 'symbiont/assertions'
 require 'symbiont/pages'
 require 'symbiont/elements'
