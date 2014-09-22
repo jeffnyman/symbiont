@@ -44,25 +44,6 @@ RSpec.configure do |config|
   end
 end
 
-RSpec.configure do |spec|
-  spec.before(:all, type: :scroll) do
-    @browser = Watir::Browser.new
-    @browser.goto "data:text/html,#{HTML}"
-  end
-
-  spec.after(:all, type: :scroll) do
-    @browser.quit
-  end
-
-  spec.after(:each, type: :scroll) do
-    @browser.refresh
-  end
-
-  def visible?(el)
-    @browser.execute_script('return elementInViewport(arguments[0]);', el)
-  end
-end
-
 Dir['spec/fixtures/**/*.rb'].each do |file|
   require file.sub(/spec\//, '')
 end
