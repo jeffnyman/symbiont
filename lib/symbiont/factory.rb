@@ -15,6 +15,11 @@ module Symbiont
 
       if @context.kind_of?(definition)
         block.call @context if block
+
+        unless @page.kind_of?(definition)
+          @page = @context
+        end
+
         return @context
       end
 
@@ -72,7 +77,6 @@ module Symbiont
     def on_set(definition, &block)
       on(definition, &block)
       @context = @page
-      @page
     end
   end
 end
