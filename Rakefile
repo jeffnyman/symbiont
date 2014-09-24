@@ -20,7 +20,6 @@ namespace :spec do
     options += %w(--format documentation)
     options += %w(--format html --out spec/reports/symbiont-test-report.html)
 
-    config.pattern = 'spec/**/*_spec.rb'
     config.rspec_opts = options
   end
 end
