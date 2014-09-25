@@ -1,4 +1,6 @@
 require 'watir-webdriver'
+require 'watir-scroll'
+require 'watir-dom-wait'
 
 require 'symbiont/version'
 require 'symbiont/errors'

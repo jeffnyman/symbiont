@@ -147,13 +147,13 @@ end
 
 #basic
 
-symbiont_driver
+symbiont_browser
 
-@page = Dialogic.new(@driver)
+@page = Dialogic.new(@browser)
 @page.view
 @page.login_as_admin
 
-@page = Practice.new(@driver)
+@page = Practice.new(@browser)
 @page.view
 @page.enable_sith_list.set
 @page.sith_power.select 'Sundering Assault'
