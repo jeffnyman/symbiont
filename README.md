@@ -1,4 +1,3 @@
-[![Stories in Ready](https://badge.waffle.io/jnyman/symbiont.png?label=ready&title=Ready)](https://waffle.io/jnyman/symbiont)
 # Symbiont
 
 [![Gem Version](https://badge.fury.io/rb/symbiont.svg)](http://badge.fury.io/rb/symbiont)
