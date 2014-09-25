@@ -32,7 +32,7 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|specs|features)/})
   spec.require_paths = %w(lib)
 
-  spec.required_ruby_version     = '>= 1.9.3'
+  spec.required_ruby_version     = '>= 2.0'
   spec.required_rubygems_version = '>= 1.8.29'
 
   spec.add_development_dependency 'bundler', '~> 1.7'
