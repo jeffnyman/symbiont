@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Symbiont::Page do
   include_context :page
   include_context :element
-
+  
   context 'a page definition being used - url' do
     it 'will establish no default url' do
       expect(empty_definition.asserted_url).to be_nil
@@ -19,7 +19,7 @@ describe Symbiont::Page do
     end
   end
 
-  context 'a page definition being used - url match' do
+  context 'a page definition being used - url match' do    
     it 'will establish no default url matcher' do
       expect(empty_definition.url_match).to be_nil
     end
