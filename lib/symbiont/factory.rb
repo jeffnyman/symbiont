@@ -24,12 +24,14 @@ module Symbiont
       end
 
       @page = definition.new(@browser)
-      @page.view if visit == true
+      @page.view if visit
 
       @page.has_correct_url? if @page.respond_to?(:url_matches)
       @page.has_correct_title? if @page.respond_to?(:title_is)
 
       block.call @page if block
+
+      @model = @page
 
       @page
     end
@@ -58,6 +60,7 @@ module Symbiont
     # @return [Object] instance of the definition
     def on_new(definition, &block)
       @page = nil
+      @model = nil
 
       if @context.kind_of?(definition)
         @context = nil

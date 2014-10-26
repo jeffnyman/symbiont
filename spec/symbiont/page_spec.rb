@@ -157,19 +157,19 @@ describe Symbiont::Page do
       watir_definition.will_prompt('Testing') {}
     end
 
-    it 'should be able to attach to a window by using the title' do
+    it 'will be able to attach to a window by using the title' do
       allow(watir_browser).to receive(:window).with(:title => /Display\ Results/).and_return(watir_browser)
       allow(watir_browser).to receive(:use)
       watir_definition.within_window(title: 'Display Results')
     end
 
-    it 'should be able to attach to a window by using the url' do
+    it 'will be able to attach to a window by using the url' do
       allow(watir_browser).to receive(:window).with(:url => /results\.html/).and_return(watir_browser)
       allow(watir_browser).to receive(:use)
       watir_definition.within_window(url: 'results.html')
     end
 
-    it 'should be able to convert a modal popup to a window' do
+    it 'will be able to convert a modal popup to a window' do
       allow(watir_browser).to receive(:execute_script)
       watir_definition.within_modal {}
     end
