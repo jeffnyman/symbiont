@@ -105,7 +105,7 @@ describe Symbiont::Page do
       expect(watir_definition.execute_script('return document.activeElement')).to eq('input')
     end
 
-    it 'should run a script, with arguments, against the browser' do
+    it 'will run a script, with arguments, against the browser' do
       expect(watir_browser).to receive(:execute_script).with('return arguments[0].innerHTML', watir_element).and_return('testing')
       expect(watir_definition.execute_script('return arguments[0].innerHTML', watir_element)).to eq('testing')
     end
