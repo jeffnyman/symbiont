@@ -57,6 +57,9 @@ describe Symbiont::Factory do
     page = @factory.on ValidPage
     current = @factory.instance_variable_get '@page'
     expect(current).to be(page)
+
+    current = @factory.instance_variable_get '@model'
+    expect(current).to be(page)
   end
 
   it 'will use an existing object reference with on_set' do

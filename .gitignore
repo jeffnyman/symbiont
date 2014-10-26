@@ -1,5 +1,6 @@
 *.gem
 *.rbc
+.idea
 .bundle
 .config
 .yardoc
@@ -20,3 +21,4 @@ tmp
 *.o
 *.a
 mkmf.log
+.DS_Store

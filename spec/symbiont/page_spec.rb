@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Symbiont::Page do
   include_context :page
   include_context :element
-
+  
   context 'a page definition being used - url' do
     it 'will establish no default url' do
       expect(empty_definition.asserted_url).to be_nil
@@ -19,7 +19,7 @@ describe Symbiont::Page do
     end
   end
 
-  context 'a page definition being used - url match' do
+  context 'a page definition being used - url match' do    
     it 'will establish no default url matcher' do
       expect(empty_definition.url_match).to be_nil
     end
@@ -105,7 +105,7 @@ describe Symbiont::Page do
       expect(watir_definition.execute_script('return document.activeElement')).to eq('input')
     end
 
-    it 'should run a script, with arguments, against the browser' do
+    it 'will run a script, with arguments, against the browser' do
       expect(watir_browser).to receive(:execute_script).with('return arguments[0].innerHTML', watir_element).and_return('testing')
       expect(watir_definition.execute_script('return arguments[0].innerHTML', watir_element)).to eq('testing')
     end
@@ -157,19 +157,19 @@ describe Symbiont::Page do
       watir_definition.will_prompt('Testing') {}
     end
 
-    it 'should be able to attach to a window by using the title' do
+    it 'will be able to attach to a window by using the title' do
       allow(watir_browser).to receive(:window).with(:title => /Display\ Results/).and_return(watir_browser)
       allow(watir_browser).to receive(:use)
       watir_definition.within_window(title: 'Display Results')
     end
 
-    it 'should be able to attach to a window by using the url' do
+    it 'will be able to attach to a window by using the url' do
       allow(watir_browser).to receive(:window).with(:url => /results\.html/).and_return(watir_browser)
       allow(watir_browser).to receive(:use)
       watir_definition.within_window(url: 'results.html')
     end
 
-    it 'should be able to convert a modal popup to a window' do
+    it 'will be able to convert a modal popup to a window' do
       allow(watir_browser).to receive(:execute_script)
       watir_definition.within_modal {}
     end

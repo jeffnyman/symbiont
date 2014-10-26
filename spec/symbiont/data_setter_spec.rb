@@ -11,7 +11,7 @@ describe Symbiont::DataSetter do
     watir_definition.using(:text_field => 'works')
   end
 
-  it 'allows methods to be chained' do
+  it 'will allow methods to be chained' do
     expect('testing'.call_method_chain("reverse.capitalize")).to eq('Gnitset')
     expect('testing'.call_method_chain("start_with?", 't')).to be_truthy
   end

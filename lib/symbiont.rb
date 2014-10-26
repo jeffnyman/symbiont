@@ -19,13 +19,6 @@ require 'symbiont/data_setter'
 require 'symbiont/data_builder'
 
 module Symbiont
-  # The included callback is used to provide the core functionality of the
-  # library to any class or module that includes the Symbiont library. The
-  # calling class or module is extended with logic that the library makes
-  # available as class methods. Any such class or module becomes a page or
-  # activity definition. The class methods allow assertions and element
-  # defintions to be defined.
-  #
   # @param caller [Class] the class including the framework
   def self.included(caller)
     caller.extend Symbiont::Assertion
@@ -43,14 +36,24 @@ module Symbiont
   def self.trace(message, level = 1)
     puts '*' * level + " #{message}" if ENV['SYMBIONT_TRACE'] == 'on'
   end
+  
+  def self.driver=(browser)
+    @browser = browser
+  end
+  
+  def self.driver
+    @browser
+  end
 
   # @return [Object] browser driver reference
   attr_reader :browser
 
-  # @param driver [Object] a tool driver instance
-  def initialize(driver)
-    Symbiont.trace("Symbiont attached to browser:\n\t#{driver.inspect}")
-    @browser = driver
+  # @param browser [Object] a tool driver instance
+  def initialize(browser=nil)
+    Symbiont.trace("Symbiont attached to browser:\n\t#{browser.inspect}")
+    
+    @browser = Symbiont.driver unless Symbiont.driver.nil?
+    @browser = browser if Symbiont.driver.nil?
 
     initialize_page if respond_to?(:initialize_page)
     initialize_activity if respond_to?(:initialize_activity)
@@ -63,6 +66,7 @@ end
 
 def symbiont_browser(browser=:firefox)
   @browser = Watir::Browser.new browser
+  Symbiont.driver = @browser
 end
 
 alias :symbiont_browser_for :symbiont_browser
