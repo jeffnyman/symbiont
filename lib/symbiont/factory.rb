@@ -29,9 +29,9 @@ module Symbiont
       @page.has_correct_url? if @page.respond_to?(:url_matches)
       @page.has_correct_title? if @page.respond_to?(:title_is)
 
-      block.call @page if block
-
       @model = @page
+
+      block.call @page if block
 
       @page
     end
