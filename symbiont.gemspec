@@ -21,15 +21,15 @@ Gem::Specification.new do |spec|
     reuse, and less repetition.
 
     You can use Symbiont directly as an automated test library or you can
-    use it with other tools such as RSpec, Cucumber, or my own Lucid tool.
+    use it with other tools such as RSpec, Cucumber, or my own Specify tool.
   }
   spec.homepage      = 'https://github.com/jnyman/symbiont'
   spec.license       = 'MIT'
 
-  spec.files         = `git ls-files -z`.split("\x0")
-  spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
-  spec.test_files    = spec.files.grep(%r{^(test|spec|specs|features)/})
-  spec.require_paths = %w(lib)
+  spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
+  spec.bindir        = 'exe'
+  spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
+  spec.require_paths = ['lib']
 
   spec.required_ruby_version     = '>= 2.0'
   spec.required_rubygems_version = '>= 1.8.29'
@@ -37,6 +37,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'bundler', '~> 1.7'
   spec.add_development_dependency 'rake', '~> 10.0'
   spec.add_development_dependency 'rspec', '~> 3.1'
+  spec.add_development_dependency 'pry'
 
   spec.add_runtime_dependency 'colorize', '~> 0.7'
   spec.add_runtime_dependency 'watir-webdriver', '~> 0.6'
