@@ -12,12 +12,13 @@ require 'symbiont/assertions'
 require 'symbiont/pages'
 require 'symbiont/elements'
 require 'symbiont/accessor'
+require 'symbiont/workflows'
 require 'symbiont/factory'
 
 require 'symbiont/data_reader'
 require 'symbiont/data_setter'
 require 'symbiont/data_builder'
-require 'symbiont/workflows'
+
 
 module Symbiont
   # @param caller [Class] the class including the framework

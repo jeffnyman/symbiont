@@ -19,7 +19,6 @@ module Symbiont
 
   module Workflow
     def self.included(caller)
-      Symbiont.trace("#{caller.class} #{caller} is using workflows.")
       caller.extend WorkflowPaths
       @def_caller = caller
     end
