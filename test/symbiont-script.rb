@@ -11,6 +11,17 @@ include Symbiont::Factory
 
 #========================================
 
+class SoapService
+  include Symbiont::SoapObject
+
+  wsdl 'http://services.aonaware.com/DictService/DictService.asmx?WSDL'
+  log_level :info
+
+  def definition_for(word)
+    define word: word
+  end
+end
+
 class Dialogic
   attach Symbiont
 
@@ -147,13 +158,23 @@ end
 
 #basic
 
-symbiont_browser
+#symbiont_browser
 
-@page = Dialogic.new(@browser)
-@page.view
-@page.login_as_admin
+#@page = Dialogic.new(@browser)
+#@page.view
+#@page.login_as_admin
 
-@page = Practice.new(@browser)
-@page.view
-@page.enable_sith_list.set
-@page.sith_power.select 'Sundering Assault'
+#@page = Practice.new(@browser)
+#@page.view
+#@page.enable_sith_list.set
+#@page.sith_power.select 'Sundering Assault'
+
+@service = SoapService.new
+#puts @service.connected?
+#puts @service.operations
+#@service.define(word: 'lucid')
+@service.definition_for('lucid')
+#puts @service.doc
+#puts @service.to_xml
+#puts @service.to_hash
+#puts @service.body

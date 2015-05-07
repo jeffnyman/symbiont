@@ -20,5 +20,9 @@ tmp
 *.so
 *.o
 *.a
+._*
 mkmf.log
 .DS_Store
+.DS_Store?
+.Trashes
+.thumbs.db

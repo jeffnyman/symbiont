@@ -19,6 +19,7 @@ require 'symbiont/data_reader'
 require 'symbiont/data_setter'
 require 'symbiont/data_builder'
 
+require 'symbiont/service_objects'
 
 module Symbiont
   # @param caller [Class] the class including the framework

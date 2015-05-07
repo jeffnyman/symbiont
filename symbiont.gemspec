@@ -43,6 +43,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'watir-webdriver', '~> 0.6'
   spec.add_runtime_dependency 'watir-dom-wait'
   spec.add_runtime_dependency 'watir-scroll'
+  spec.add_runtime_dependency 'savon'
 
   spec.post_install_message = %{
 (::) (::) (::) (::) (::) (::) (::) (::) (::) (::) (::) (::)
