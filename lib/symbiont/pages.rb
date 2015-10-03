@@ -8,19 +8,23 @@ module Symbiont
       self
     end
 
-    def correct_url?
+    def has_correct_url?
       no_url_matches_is_provided if url_match.nil?
       !(browser.url =~ url_match).nil?
     end
 
-    def correct_title?
+    def has_correct_title?
       no_title_is_provided if asserted_title.nil?
       !(browser.title.match(asserted_title)).nil?
     end
 
     def verified?
-      correct_url?
-      correct_title?
+      has_correct_url?
+      has_correct_title?
+    end
+
+    def displayed?
+      has_correct_url?
     end
 
     def asserted_url

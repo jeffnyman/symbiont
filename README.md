@@ -65,7 +65,7 @@ Bug reports and pull requests are welcome on GitHub at [https://github.com/jnyma
 
 To contribute to Symbiont:
 
-1. [Fork the project](http://gun.io/blog/how-to-github-fork-branch-and-pull-request/) ( https://github.com/[my-github-username]/symbiont/fork ).
+1. [Fork the project](http://gun.io/blog/how-to-github-fork-branch-and-pull-request/).
 2. Create your feature branch. (`git checkout -b my-new-feature`)
 3. Commit your changes. (`git commit -am 'new feature'`)
 4. Push the branch. (`git push origin my-new-feature`)

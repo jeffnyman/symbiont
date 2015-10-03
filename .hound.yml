@@ -51,6 +51,9 @@ Style/DotPosition:
 Style/AccessorMethodName:
   Enabled: false
 
+Style/PredicateName:
+  Enabled: false
+
 # stop nesting so hard
 Metrics/BlockNesting:
   Max: 2

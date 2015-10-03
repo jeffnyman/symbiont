@@ -28,7 +28,7 @@ RSpec.describe Symbiont::Page do
     end
 
     it 'will not verify a url if the url_matches assertion has not been set' do
-      expect { empty_definition.correct_url? }.to raise_error Symbiont::Errors::NoUrlMatchForDefinition
+      expect { empty_definition.has_correct_url? }.to raise_error Symbiont::Errors::NoUrlMatchForDefinition
     end
   end
 
@@ -43,7 +43,7 @@ RSpec.describe Symbiont::Page do
     end
 
     it 'will not verify a title if the title_is assertion has not been set' do
-      expect { empty_definition.correct_title? }.to raise_error Symbiont::Errors::NoTitleForDefinition
+      expect { empty_definition.has_correct_title? }.to raise_error Symbiont::Errors::NoTitleForDefinition
     end
   end
 
@@ -52,6 +52,11 @@ RSpec.describe Symbiont::Page do
       expect(watir_browser).to receive(:title).and_return('Dialogic')
       expect(watir_browser).to receive(:url).and_return('http://localhost:9292')
       watir_definition.verified?
+    end
+
+    it 'will be able to check if a page is displayed' do
+      expect(watir_browser).to receive(:url).and_return('http://localhost:9292')
+      watir_definition.displayed?
     end
 
     it 'will be able to get the active url' do
