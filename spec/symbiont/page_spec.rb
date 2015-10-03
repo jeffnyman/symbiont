@@ -1,9 +1,7 @@
-require 'spec_helper'
-
-describe Symbiont::Page do
+RSpec.describe Symbiont::Page do
   include_context :page
   include_context :element
-  
+
   context 'a page definition being used - url' do
     it 'will establish no default url' do
       expect(empty_definition.asserted_url).to be_nil
@@ -19,7 +17,7 @@ describe Symbiont::Page do
     end
   end
 
-  context 'a page definition being used - url match' do    
+  context 'a page definition being used - url match' do
     it 'will establish no default url matcher' do
       expect(empty_definition.url_match).to be_nil
     end
@@ -30,7 +28,7 @@ describe Symbiont::Page do
     end
 
     it 'will not verify a url if the url_matches assertion has not been set' do
-      expect { empty_definition.has_correct_url? }.to raise_error Symbiont::Errors::NoUrlMatchForDefinition
+      expect { empty_definition.correct_url? }.to raise_error Symbiont::Errors::NoUrlMatchForDefinition
     end
   end
 
@@ -45,7 +43,7 @@ describe Symbiont::Page do
     end
 
     it 'will not verify a title if the title_is assertion has not been set' do
-      expect { empty_definition.has_correct_title? }.to raise_error Symbiont::Errors::NoTitleForDefinition
+      expect { empty_definition.correct_title? }.to raise_error Symbiont::Errors::NoTitleForDefinition
     end
   end
 

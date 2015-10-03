@@ -1,7 +1,5 @@
 module Symbiont
   module Factory
-    include Workflow
-
     # Creates a definition context for actions. If an existing context
     # exists, that context will be re-used.
     #
@@ -9,27 +7,20 @@ module Symbiont
     # @param visit [Boolean] true if the context needs to be called into view
     # @param block [Proc] logic to execute in the context of the definition
     # @return [Object] instance of the definition
-    def on(definition, visit=false, &block)
-      if @page.kind_of?(definition)
+    def on(definition, visit = false, &block)
+      if @page.is_a?(definition)
         block.call @page if block
         return @page
       end
 
-      if @context.kind_of?(definition)
+      if @context.is_a?(definition)
         block.call @context if block
-
-        unless @page.kind_of?(definition)
-          @page = @context
-        end
-
+        @page = @context
         return @context
       end
 
       @page = definition.new(@browser)
       @page.view if visit
-
-      @page.has_correct_url? if @page.respond_to?(:url_matches)
-      @page.has_correct_title? if @page.respond_to?(:title_is)
 
       @model = @page
 
@@ -64,10 +55,7 @@ module Symbiont
       @page = nil
       @model = nil
 
-      if @context.kind_of?(definition)
-        @context = nil
-      end
-      
+      @context = nil if @context.is_a?(definition)
       on(definition, &block)
     end
 

@@ -1,8 +1,6 @@
 # Symbiont
 
-[ ![Codeship Status for jnyman/symbiont](https://codeship.com/projects/9cd74720-bba9-0132-db22-7ae602eb521b/status?branch=master)](https://codeship.com/projects/72247)
-
-[![Coverage Status](https://coveralls.io/repos/jnyman/symbiont/badge.svg?branch=master)](https://coveralls.io/r/jnyman/symbiont?branch=master)
+[![Build Status](https://travis-ci.org/jnyman/symbiont.svg)](https://travis-ci.org/jnyman/symbiont)
 [![Gem Version](https://badge.fury.io/rb/symbiont.svg)](http://badge.fury.io/rb/symbiont)
 [![Dependency Status](https://gemnasium.com/jnyman/symbiont.png)](https://gemnasium.com/jnyman/symbiont)
 [![Code Climate](https://codeclimate.com/github/jnyman/symbiont/badges/gpa.svg)](https://codeclimate.com/github/jnyman/symbiont)
@@ -16,20 +14,26 @@ Symbiont provides a semantic domain-specific language that can be used to constr
 
 Symbiont is a test solution micro-framework.
 
-A micro-framework provides a focused solution, which means it does one thing and one thing only, instead of trying to solve each and every problem. While doing that one thing it does well, the micro-framework should do it while being expressive and concise. Further, it should be able to serve as one component of your own custom modularized framework, allowing you to compose solutions.
+A micro-framework provides a focused solution, which means it does one thing and one thing only, instead of trying to solve each and every problem. While doing that one thing it does well, the micro-framework should do it while being expressive yet concise. Further, it should be able to serve as one component of your own custom modularized framework, allowing you to compose solutions. To that end, you can use Symbiont directly as an automated test library or you can use it with other tools such as [RSpec](http://rspec.info/), [Cucumber](http://cukes.info/), or my own [Specify](https://github.com/jnyman/specify) tool.
 
-To that end, you can use Symbiont directly as an automated test library or you can use it with other tools such as [RSpec](http://rspec.info/), [Cucumber](http://cukes.info/), or my own [Lucid](https://github.com/jnyman/lucid) tool.
+In terms of what Symbiont does, it provides a way to describe your application in terms of activity and page definitions. Those definitions can then be referenced as part of the DSL that Symbiont provides. This DSL can be utilized in the context of the [Watir-WebDriver test library](https://github.com/watir/watir-webdriver).
 
-In terms of what Symbiont does, it provides a way to describe your application in terms of activity and page definitions. Those definitions can then be referenced by the [Watir-WebDriver test library](https://github.com/watir/watir-webdriver) using the DSL and API that Symbiont provides. The DSL provides a fluent interface that can be used for constructing test execution logic. This fluent interface promotes the idea of compressibility of your test logic, allowing for more factoring, more reuse, and less repetition.
+The DSL provides a fluent interface that can be used for constructing test execution logic. This fluent interface promotes the idea of compressibility of your test logic, allowing for more factoring, more reuse, and less repetition.
 
 
 ## Installation
 
-You can use Symbiont as part of another project, in which case you can add the following to your Gemfile:
+To get the latest stable release, add this line to your application's Gemfile:
 
     gem 'symbiont'
 
-And then execute:
+To get the latest code:
+
+```ruby
+gem 'symbiont', git: https://github.com/jnyman/symbiont
+```
+
+After doing one of the above, execute the following command:
 
     $ bundle
 
@@ -56,6 +60,10 @@ Symbiotic relationships include associations in which one organism lives on anot
 So, with that bit of context, think of this library as a facultative, endosymbiotic organism that lives within your test logic, giving it strength and sustenance.
 
 ## Contributing
+
+Bug reports and pull requests are welcome on GitHub at [https://github.com/jnyman/symbiont](https://github.com/jnyman/symbiont). The testing ecosystem of Ruby is very large and this project is intended to be a welcoming arena for collaboration on yet another testing tool. As such, contributors are very much welcome but are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+
+To contribute to Symbiont:
 
 1. [Fork the project](http://gun.io/blog/how-to-github-fork-branch-and-pull-request/) ( https://github.com/[my-github-username]/symbiont/fork ).
 2. Create your feature branch. (`git checkout -b my-new-feature`)

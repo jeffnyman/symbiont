@@ -99,7 +99,7 @@ def framed
 end
 
 def basic
-  @page = Practice.new(@driver)  
+  @page = Practice.new(@driver)
   @page.should be_a_kind_of(Symbiont)
   @page.should be_an_instance_of(Practice)
 
@@ -158,7 +158,7 @@ end
 
 #basic
 
-#symbiont_browser
+#Symbiont.set_browser
 
 #@page = Dialogic.new(@browser)
 #@page.view

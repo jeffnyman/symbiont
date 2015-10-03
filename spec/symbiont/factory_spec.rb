@@ -1,6 +1,4 @@
-require 'spec_helper'
-
-describe Symbiont::Factory do
+RSpec.describe Symbiont::Factory do
   before(:each) do
     @factory = TestFactory.new
     @factory.browser = mock_browser_for_watir

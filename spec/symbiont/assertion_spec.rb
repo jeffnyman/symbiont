@@ -1,6 +1,4 @@
-require 'spec_helper'
-
-describe Symbiont::Assertion do
+RSpec.describe Symbiont::Assertion do
   context 'a definition with valid assertions' do
     it 'will allow a url to be asserted' do
       expect {

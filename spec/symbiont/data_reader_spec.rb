@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 module TestModule
   extend Symbiont::DataReader
 
@@ -8,7 +6,7 @@ module TestModule
   end
 end
 
-describe Symbiont::DataReader do
+RSpec.describe Symbiont::DataReader do
   context 'when configuring the data directory' do
     before(:each) do
       TestModule.data_path = nil

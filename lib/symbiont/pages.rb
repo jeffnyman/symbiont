@@ -8,19 +8,19 @@ module Symbiont
       self
     end
 
-    def has_correct_url?
+    def correct_url?
       no_url_matches_is_provided if url_match.nil?
       !(browser.url =~ url_match).nil?
     end
 
-    def has_correct_title?
+    def correct_title?
       no_title_is_provided if asserted_title.nil?
       !(browser.title.match(asserted_title)).nil?
     end
 
     def verified?
-      has_correct_url?
-      has_correct_title?
+      correct_url?
+      correct_title?
     end
 
     def asserted_url
@@ -64,10 +64,8 @@ module Symbiont
     end
 
     def get_cookie(name)
-      for cookie in browser.cookies.to_a
-        if cookie[:name] == name
-          return cookie[:value]
-        end
+      browser.cookies.to_a.each do |cookie|
+        return cookie[:value] if cookie[:name] == name
       end
       nil
     end
@@ -80,9 +78,8 @@ module Symbiont
       browser.refresh
     end
 
-    # @param block [Proc] the code that generates the alert
     # @return [String] the message contained in the alert message box
-    def will_alert(&block)
+    def will_alert
       yield
       value = nil
       if browser.alert.exists?
@@ -92,10 +89,9 @@ module Symbiont
       value
     end
 
-    # @param response [Boolean] true to accept the confirmation, false to cancel it
-    # @param block [Proc] the code that generates the confirmation
+    # @param response [Boolean] true to accept confirmation, false to cancel it
     # @return [String] the message contained in the confirmation message box
-    def will_confirm(response, &block)
+    def will_confirm(response)
       yield
       value = nil
       if browser.alert.exists?
@@ -106,11 +102,12 @@ module Symbiont
     end
 
     # @param response [String] the value to be used in the prompt
-    # @param block [Proc] the code that generates the prompt
     # @return [Hash] :message for the prompt message, :default_value for
     # the value that the prompt had before the response was applied
-    def will_prompt(response, &block)
-      cmd = "window.prompt = function(text, value) {window.__lastWatirPrompt = {message: text, default_value: value}; return '#{response}';}"
+    def will_prompt(response)
+      cmd = "window.prompt = function(text, value) \
+        {window.__lastWatirPrompt = {message: text, default_value: value}; \
+        return '#{response}';}"
       browser.wd.execute_script(cmd)
       yield
       result = browser.wd.execute_script('return window.__lastWatirPrompt')
@@ -127,7 +124,7 @@ module Symbiont
     # @param block [Proc] any code that should be executed as an
     # action on or within the window
     def within_window(locator, &block)
-      identifier = {locator.keys.first => /#{Regexp.escape(locator.values.first)}/}
+      identifier = { locator.keys.first => /#{Regexp.escape(locator.values.first)}/ }
       browser.window(identifier).use(&block)
     end
 
@@ -135,8 +132,8 @@ module Symbiont
     # like a modal dialog box. What this does is override the normal call to
     # showModalDialog and opens a window instead. In order to use this new
     # window, you have to attach to it.
-    def within_modal(&block)
-      convert_modal_to_window = %Q{
+    def within_modal
+      convert_modal_to_window = %{
         window.showModalDialog = function(sURL, vArguments, sFeatures) {
           window.dialogArguments = vArguments;
           modalWin = window.open(sURL, 'modal', sFeatures);

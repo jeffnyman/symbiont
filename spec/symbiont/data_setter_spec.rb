@@ -1,6 +1,4 @@
-require 'spec_helper'
-
-describe Symbiont::DataSetter do
+RSpec.describe Symbiont::DataSetter do
   include_context :page
   include_context :element
 

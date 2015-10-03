@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 class TestService
   include Symbiont::SoapObject
 
@@ -31,7 +29,7 @@ class TestNoSSLService
   ssl_verification false
 end
 
-describe Symbiont::SoapObject do
+RSpec.describe Symbiont::SoapObject do
   let(:client) { double('client') }
   let(:subject) { TestService.new }
 

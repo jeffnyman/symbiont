@@ -1,6 +1,5 @@
 module Symbiont
   module DataReader
-
     def data_path=(path)
       @data_path = path
     end
@@ -17,6 +16,5 @@ module Symbiont
     def load(file)
       @data_source = YAML.load_file "#{data_path}/#{file}"
     end
-    
   end
 end

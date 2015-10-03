@@ -14,7 +14,7 @@ module Symbiont
     end
 
     def connected?
-      not @client.nil?
+      !@client.nil?
     end
 
     def operations
@@ -47,7 +47,7 @@ module Symbiont
       operation = args.shift
       message = args.shift
       type = message.is_a?(String) ? :xml : :message
-      call(operation, { type => message })
+      call(operation, type => message)
     end
 
     def call(operation, data)
@@ -58,19 +58,19 @@ module Symbiont
     def client_properties
       properties = { log: false, ssl_version: :SSLv3, ssl_verify_mode: :none }
       [
-          :has_wsdl,
-          :has_proxy,
-          :has_basic_auth,
-          :has_digest_auth,
-          :has_encoding,
-          :has_soap_header,
-          :has_open_timeout,
-          :has_read_timeout,
-          :has_log_level,
-          :has_ssl_version,
-          :has_ssl_verification
+        :has_wsdl,
+        :has_proxy,
+        :has_basic_auth,
+        :has_digest_auth,
+        :has_encoding,
+        :has_soap_header,
+        :has_open_timeout,
+        :has_read_timeout,
+        :has_log_level,
+        :has_ssl_version,
+        :has_ssl_verification,
       ].each do |sym|
-        properties = properties.merge(self.send sym) if self.respond_to? sym
+        properties = properties.merge(send sym) if self.respond_to? sym
       end
       properties
     end

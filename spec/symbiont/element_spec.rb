@@ -1,6 +1,4 @@
-require 'spec_helper'
-
-describe Symbiont::Element do
+RSpec.describe Symbiont::Element do
   include_context :page
   include_context :element
 

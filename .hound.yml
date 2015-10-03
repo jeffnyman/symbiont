@@ -1,0 +1,76 @@
+AllCops:
+  Exclude:
+    - symbiont.gemspec
+    - test/*.rb
+    - spec/**/*
+
+# missing top-level module documentation comment
+Style/Documentation:
+  Enabled: false
+
+# prefer reduce over inject
+Style/CollectionMethods:
+  PreferredMethods:
+    reduce: 'inject'
+
+# use each_with_object instead of inject
+Style/EachWithObject:
+  Enabled: false
+
+# removing the preference for string single quotes
+Style/StringLiterals:
+  Enabled: false
+
+# prefer fail over raise
+Style/SignalException:
+  Enabled: false
+
+Style/TrailingComma:
+  EnforcedStyleForMultiline: comma
+
+# this never works for validations
+Style/AlignHash:
+  EnforcedLastArgumentHashStyle: ignore_implicit
+
+# align multi-line params with previous line
+Style/AlignParameters:
+  EnforcedStyle: with_fixed_indentation
+
+# indent `when` clause one step from `case`
+Style/CaseIndentation:
+  IndentOneStep: true
+
+# don't force crappy var names for reduce/inject loops
+Style/SingleLineBlockParams:
+  Enabled: false
+
+# for method chains, keep the dot with the method name
+Style/DotPosition:
+  EnforcedStyle: leading
+
+Style/AccessorMethodName:
+  Enabled: false
+
+# stop nesting so hard
+Metrics/BlockNesting:
+  Max: 2
+
+# short methods
+Metrics/MethodLength:
+  Max: 20
+
+Metrics/LineLength:
+  Max: 105
+
+# fewer parameters
+Metrics/ParameterLists:
+  Max: 5
+
+Metrics/AbcSize:
+  Enabled: false
+
+Metrics/ModuleLength:
+  Max: 120
+
+Metrics/CyclomaticComplexity:
+  Max: 7

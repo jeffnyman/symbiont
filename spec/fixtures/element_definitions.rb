@@ -1,4 +1,4 @@
-shared_examples_for 'element generator for' do |elements|
+RSpec.shared_examples_for 'element generator for' do |elements|
   elements.each do |element|
 
     context "#{element} on the watir-webdriver platform" do
@@ -31,7 +31,7 @@ shared_examples_for 'element generator for' do |elements|
   end
 end
 
-shared_examples_for 'element set generator for' do |elements|
+RSpec.shared_examples_for 'element set generator for' do |elements|
   elements.each do |element|
     it "will set a value on a specific #{element} with a single locator" do
       expect(watir_browser).to receive(element).with(id: element).and_return(watir_element)
@@ -54,7 +54,7 @@ shared_examples_for 'element set generator for' do |elements|
   end
 end
 
-shared_examples_for 'element select generator for' do |elements|
+RSpec.shared_examples_for 'element select generator for' do |elements|
   elements.each do |element|
     it "will set a value on a specific #{element} with a single locator" do
       expect(watir_browser).to receive(element).with(id: element).and_return(watir_element)

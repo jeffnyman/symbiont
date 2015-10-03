@@ -6,7 +6,7 @@ module Symbiont
   def self.elements
     unless @elements
       @elements = Watir::Container.instance_methods
-      #@elements.delete(:extract_selector)
+      # @elements.delete(:extract_selector)
     end
     @elements
   end
@@ -114,16 +114,17 @@ module Symbiont
     # handled by define_element_accessor instead.
     def define_set_accessor(identifier, locator, element, &block)
       define_method "#{identifier}=".to_sym do |*values|
-        accessor = if block_given?
+        accessor =
+        if block_given?
           instance_exec(&block)
         else
           reference_element(element, locator)
         end
 
         if accessor.respond_to?(:set)
-          accessor.set *values
+          accessor.set(*values)
         else
-          accessor.send_keys *values
+          accessor.send_keys(*values)
         end
       end
     end
@@ -151,9 +152,9 @@ module Symbiont
     def define_select_accessor(identifier, locator, element, &block)
       define_method "#{identifier}=".to_sym do |*values|
         if block_given?
-          instance_exec(&block).select *values
+          instance_exec(&block).select(*values)
         else
-          reference_element(element, locator).select *values
+          reference_element(element, locator).select(*values)
         end
       end
     end
@@ -163,7 +164,8 @@ module Symbiont
     # @param signature [Array] full element definition
     # @return [String] identifier and locator portions
     def parse_signature(signature)
-      return signature.shift, signature.shift
+      # return signature.shift, signature.shift
+      [signature.shift, signature.shift]
     end
 
     # Returns the block or proc that serves as a context for an element
@@ -180,6 +182,5 @@ module Symbiont
         context.is_a?(Proc) && locator.empty? ? context : nil
       end
     end
-
   end
 end

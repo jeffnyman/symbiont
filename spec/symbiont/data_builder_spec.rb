@@ -1,6 +1,4 @@
-require 'spec_helper'
-
-describe Symbiont::DataBuilder do
+RSpec.describe Symbiont::DataBuilder do
   include_context :page
 
   context 'when configuring the data path' do

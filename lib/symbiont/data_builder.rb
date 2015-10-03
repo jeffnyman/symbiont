@@ -10,7 +10,7 @@ module Symbiont
       end
     end
 
-    def data_about(key, specified={})
+    def data_about(key, specified = {})
       if key.is_a?(String) && key.match(%r{/})
         file, record = key.split('/')
         DataBuilder.load("#{file}.yml")
@@ -19,7 +19,7 @@ module Symbiont
         DataBuilder.load('default.yml')
       end
 
-      Symbiont::trace("DataBuilder.data_source = #{DataBuilder.data_source}")
+      Symbiont.trace("DataBuilder.data_source = #{DataBuilder.data_source}")
 
       data = DataBuilder.data_source[record]
       raise ArgumentError, "Undefined key for data: #{key}" unless data

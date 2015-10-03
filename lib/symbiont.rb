@@ -12,7 +12,6 @@ require 'symbiont/assertions'
 require 'symbiont/pages'
 require 'symbiont/elements'
 require 'symbiont/accessor'
-require 'symbiont/workflows'
 require 'symbiont/factory'
 
 require 'symbiont/data_reader'
@@ -26,25 +25,22 @@ module Symbiont
   def self.included(caller)
     caller.extend Symbiont::Assertion
     caller.extend Symbiont::Element
-    
     caller.send :include, Symbiont::Page
     caller.send :include, Symbiont::Accessor
-
     caller.send :include, Symbiont::DataSetter
     caller.send :include, Symbiont::DataBuilder
-
     Symbiont.trace("#{caller.class} #{caller} has attached the Symbiont.")
   end
 
   def self.trace(message, level = 1)
     puts '*' * level + " #{message}" if ENV['SYMBIONT_TRACE'] == 'on'
   end
-  
-  def self.driver=(browser)
+
+  def self.browser=(browser)
     @browser = browser
   end
-  
-  def self.driver
+
+  def self.browser
     @browser
   end
 
@@ -52,48 +48,50 @@ module Symbiont
   attr_reader :browser
 
   # @param browser [Object] a tool driver instance
-  def initialize(browser=nil)
+  def initialize(browser = nil)
     Symbiont.trace("Symbiont attached to browser:\n\t#{browser.inspect}")
-    
-    @browser = Symbiont.driver unless Symbiont.driver.nil?
-    @browser = browser if Symbiont.driver.nil?
+
+    @browser = Symbiont.browser unless Symbiont.browser.nil?
+    @browser = browser if Symbiont.browser.nil?
 
     initialize_page if respond_to?(:initialize_page)
     initialize_activity if respond_to?(:initialize_activity)
   end
+
+  def self.set_browser(app = :firefox)
+    @browser = Watir::Browser.new(app)
+    Symbiont.browser = @browser
+  end
 end
 
-def attach(mod=Symbiont)
+def attach(mod = Symbiont)
   include mod
 end
 
-def symbiont_browser(browser=:firefox)
-  @browser = Watir::Browser.new browser
-  Symbiont.driver = @browser
-end
-
-alias :symbiont_browser_for :symbiont_browser
-
 class Object
-  def call_method_chain(method_chain, arg=nil)
+  def call_method_chain(method_chain, arg = nil)
     return self if method_chain.empty?
-    method_chain.split('.').inject(self) { |o,m|
+    method_chain.split('.').inject(self) do |o, m|
       if arg.nil?
         o.send(m.intern)
       else
         o.send(m.intern, arg)
       end
-    }
+    end
   end
 end
 
-class Watir::CheckBox
-  alias_method :check, :set
-  alias_method :uncheck, :clear
-  alias_method :checked?, :set?
+module Watir
+  class CheckBox
+    alias_method :check, :set
+    alias_method :uncheck, :clear
+    alias_method :checked?, :set?
+  end
 end
 
-class Watir::Radio
-  alias_method :choose, :set
-  alias_method :chosen?, :set?
+module Watir
+  class Radio
+    alias_method :choose, :set
+    alias_method :chosen?, :set?
+  end
 end
