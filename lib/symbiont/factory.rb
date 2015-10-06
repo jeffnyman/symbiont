@@ -22,6 +22,14 @@ module Symbiont
       @page = definition.new(@browser)
       @page.view if visit
 
+      if @page.class.instance_variable_get(:@url_match)
+        raise Symbiont::Errors::PageURLFromFactoryNotVerified unless @page.has_correct_url?
+      end
+
+      if @page.class.instance_variable_get(:@title)
+        raise Symbiont::Errors::PageTitleFromFactoryNotVerified unless @page.has_correct_title?
+      end
+
       @model = @page
 
       block.call @page if block
