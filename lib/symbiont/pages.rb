@@ -27,6 +27,10 @@ module Symbiont
       has_correct_url?
     end
 
+    def secure?
+      !url.match(/^https/).nil?
+    end
+
     def asserted_url
       self.class.asserted_url
     end

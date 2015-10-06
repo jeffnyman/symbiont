@@ -22,22 +22,22 @@ module Symbiont
 
     def no_url_is_provided
       puts "\nERROR".on_red
-      puts "You called a '#{retrieve_method(caller)}' action but the \
-        definition #{self.class} does not have a url_is assertion.".cyan
+      puts "You called a '#{retrieve_method(caller)}' action but the ".cyan +
+        "definition #{self.class} does not have a url_is assertion.".cyan
       raise Symbiont::Errors::NoUrlForDefinition
     end
 
     def no_url_matches_is_provided
       puts "\nERROR".on_red
-      puts "You called a '#{retrieve_method(caller)}' action but the \
-        definition #{self.class} does not have a url_matches assertion.".cyan
+      puts "You called a '#{retrieve_method(caller)}' action but the ".cyan +
+        "definition #{self.class} does not have a url_matches assertion.".cyan
       raise Symbiont::Errors::NoUrlMatchForDefinition
     end
 
     def no_title_is_provided
       puts "\nERROR".on_red
-      puts "You called a '#{retrieve_method(caller)}' action but the \
-        definition #{self.class} does not have a title_is assertion.".cyan
+      puts "You called a '#{retrieve_method(caller)}' action but the ".cyan +
+        "definition #{self.class} does not have a title_is assertion.".cyan
       raise Symbiont::Errors::NoTitleForDefinition
     end
 

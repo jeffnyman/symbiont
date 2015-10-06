@@ -36,7 +36,7 @@ RSpec.describe 'Page Definitions' do
 
     context 'with a title_is assertion' do
       it 'will verify a title if the title_is assertion has been set' do
-        expect(watir_browser).to receive(:title).twice.and_return 'Dialogic'
+        expect(watir_browser).to receive(:title).twice.and_return 'Symbiote'
         expect { watir_definition.has_correct_title? }.not_to raise_error
         expect(watir_definition.has_correct_title?).to be_truthy
       end

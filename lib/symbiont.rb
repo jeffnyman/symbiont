@@ -44,6 +44,14 @@ module Symbiont
     @browser
   end
 
+  def self.version
+    """
+Symbiont v#{Symbiont::VERSION}
+Watir-WebDriver: #{Gem.loaded_specs['watir-webdriver'].version}
+Selenium-WebDriver: #{Gem.loaded_specs['selenium-webdriver'].version}
+    """
+  end
+
   # @return [Object] browser driver reference
   attr_reader :browser
 

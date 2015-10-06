@@ -3,28 +3,32 @@ module Symbiont
   # Watir uses to reference and access web objects.
   #
   # @return [Array] factory method list
-  def self.elements
-    unless @elements
-      @elements = Watir::Container.instance_methods
-      # @elements.delete(:extract_selector)
+  class << self
+    attr_accessor :settable, :selectable
+
+    def elements
+      unless @elements
+        @elements = Watir::Container.instance_methods
+        @elements.delete(:extract_selector)
+      end
+      @elements
     end
-    @elements
-  end
 
-  def self.settable
-    @settable ||= [:text_field, :file_field, :textarea]
-  end
+    def settable
+      @settable ||= [:text_field, :file_field, :textarea, :checkbox]
+    end
 
-  def self.selectable
-    @selectable ||= [:select_list]
-  end
+    def selectable
+      @selectable ||= [:select_list]
+    end
 
-  def self.settable?(element)
-    settable.include? element.to_sym
-  end
+    def settable?(element)
+      settable.include? element.to_sym
+    end
 
-  def self.selectable?(element)
-    selectable.include? element.to_sym
+    def selectable?(element)
+      selectable.include? element.to_sym
+    end
   end
 
   module Element
@@ -32,7 +36,7 @@ module Symbiont
     # as a method that can be called on a page class. This is what
     # allows element definitions to be created.
     Symbiont.elements.each do |element|
-      define_method element do |*signature, &block|
+      define_method(element) do |*signature, &block|
         identifier, locator = parse_signature(signature)
         context = context_from_signature(locator, &block)
         define_element_accessor(identifier, locator, element, &context)
@@ -82,11 +86,12 @@ module Symbiont
     #
     # This approach would lead to the *values variable having
     # an array like this: ["Click Me"].
-    def define_element_accessor(identifier, locator, element, &block)
-      define_method "#{identifier}".to_sym do |*values|
+    def define_element_accessor(identifier, *locator, element, &block)
+      define_method("#{identifier}".to_sym) do |*values|
         if block_given?
           instance_exec(*values, &block)
         else
+          locator = [] if locator[0].nil?
           reference_element(element, locator)
         end
       end
@@ -112,8 +117,8 @@ module Symbiont
     # The second approach would lead to the *values variable having
     # an array like this: ['200']. The first approach would be
     # handled by define_element_accessor instead.
-    def define_set_accessor(identifier, locator, element, &block)
-      define_method "#{identifier}=".to_sym do |*values|
+    def define_set_accessor(identifier, *locator, element, &block)
+      define_method("#{identifier}=".to_sym) do |*values|
         accessor =
         if block_given?
           instance_exec(&block)
@@ -149,8 +154,8 @@ module Symbiont
     # The second approach would lead to the *values variable having
     # an array like this: ['City']. The first approach would be
     # handled by define_element_accessor instead.
-    def define_select_accessor(identifier, locator, element, &block)
-      define_method "#{identifier}=".to_sym do |*values|
+    def define_select_accessor(identifier, *locator, element, &block)
+      define_method("#{identifier}=".to_sym) do |*values|
         if block_given?
           instance_exec(&block).select(*values)
         else

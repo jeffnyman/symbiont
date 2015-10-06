@@ -39,7 +39,7 @@ RSpec.describe Symbiont::Page do
 
     it 'will establish a page title with the title_is assertion' do
       expect(watir_definition).to respond_to :asserted_title
-      expect(watir_definition.asserted_title).to eq('Dialogic')
+      expect(watir_definition.asserted_title).to eq('Symbiote')
     end
 
     it 'will not verify a title if the title_is assertion has not been set' do
@@ -49,7 +49,7 @@ RSpec.describe Symbiont::Page do
 
   context 'an instance of a page definition' do
     it 'will be able to verify a page' do
-      expect(watir_browser).to receive(:title).and_return('Dialogic')
+      expect(watir_browser).to receive(:title).and_return('Symbiote')
       expect(watir_browser).to receive(:url).and_return('http://localhost:9292')
       watir_definition.verified?
     end
@@ -57,6 +57,11 @@ RSpec.describe Symbiont::Page do
     it 'will be able to check if a page is displayed' do
       expect(watir_browser).to receive(:url).and_return('http://localhost:9292')
       watir_definition.displayed?
+    end
+
+    it 'will be able to verify a secure page' do
+      expect(watir_browser).to receive(:url).and_return('https://localhost:9292')
+      expect(watir_definition.secure?).to be_truthy
     end
 
     it 'will be able to get the active url' do
