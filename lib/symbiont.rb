@@ -66,8 +66,8 @@ Selenium-WebDriver: #{Gem.loaded_specs['selenium-webdriver'].version}
     initialize_activity if respond_to?(:initialize_activity)
   end
 
-  def self.set_browser(app = :firefox)
-    @browser = Watir::Browser.new(app)
+  def self.set_browser(app = :firefox, *args)
+    @browser = Watir::Browser.new(app, *args)
     Symbiont.browser = @browser
   end
 end
