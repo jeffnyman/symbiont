@@ -16,8 +16,9 @@ end
 
 puts Symbiont.version
 
-@page = Symbiote.new
-@page.view
+on_view(Symbiote)
+#@page = Symbiote.new
+#@page.view
 
 puts "Page displayed? #{@page.displayed?}"
 

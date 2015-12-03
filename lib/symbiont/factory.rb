@@ -8,19 +8,11 @@ module Symbiont
     # @param block [Proc] logic to execute in the context of the definition
     # @return [Object] instance of the definition
     def on(definition, visit = false, &block)
-      if @page.is_a?(definition)
-        block.call @page if block
-        return @page
+      unless @page.is_a?(definition)
+        @page = definition.new(@browser) if @browser
+        @page = definition.new unless @browser
+        @page.view if visit
       end
-
-      if @context.is_a?(definition)
-        block.call @context if block
-        @page = @context
-        return @context
-      end
-
-      @page = definition.new(@browser)
-      @page.view if visit
 
       if @page.class.instance_variable_get(:@url_match)
         raise Symbiont::Errors::PageURLFromFactoryNotVerified unless @page.has_correct_url?
@@ -30,10 +22,7 @@ module Symbiont
         raise Symbiont::Errors::PageTitleFromFactoryNotVerified unless @page.has_correct_title?
       end
 
-      @model = @page
-
       block.call @page if block
-
       @page
     end
 
@@ -61,23 +50,7 @@ module Symbiont
     # @return [Object] instance of the definition
     def on_new(definition, &block)
       @page = nil
-      @model = nil
-
-      @context = nil if @context.is_a?(definition)
       on(definition, &block)
-    end
-
-    # Creates a definition context for actions. If an existing context
-    # exists, that context will be re-used. This also sets a context that
-    # will be used for that definition even if the active definition
-    # changes.
-    #
-    # @param definition [Class] the name of a definition class
-    # @param block [Proc] logic to execute within the context of the definition
-    # @return [Object] instance of the definition
-    def on_set(definition, &block)
-      on(definition, &block)
-      @context = @page
     end
   end
 end

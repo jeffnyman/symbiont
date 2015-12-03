@@ -30,8 +30,8 @@ puts Symbiont.version
 Symbiont.set_browser
 
 on_view(Symbiote)
-#@home = Symbiote.new
-#@home.view
+#@page = Symbiote.new
+#@page.view
 
 puts "Page displayed? #{@page.displayed?}"
 
