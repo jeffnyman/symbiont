@@ -20,12 +20,14 @@ require 'symbiont/data_builder'
 
 require 'symbiont/service_objects'
 
+require 'symbiont/capybara/page'
+
 module Symbiont
   # @param caller [Class] the class including the framework
   def self.included(caller)
     caller.extend Symbiont::Assertion
     caller.extend Symbiont::Element
-    caller.send :include, Symbiont::Page
+    caller.send :include, Symbiont::Pages
     caller.send :include, Symbiont::Accessor
     caller.send :include, Symbiont::DataSetter
     caller.send :include, Symbiont::DataBuilder
@@ -49,6 +51,7 @@ module Symbiont
 Symbiont v#{Symbiont::VERSION}
 Watir-WebDriver: #{Gem.loaded_specs['watir-webdriver'].version}
 Selenium-WebDriver: #{Gem.loaded_specs['selenium-webdriver'].version}
+Capybara: #{Gem.loaded_specs['capybara'].version}
     """
   end
 

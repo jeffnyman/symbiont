@@ -1,5 +1,5 @@
 module Symbiont
-  module Page
+  module Pages
     include Helpers
 
     def view

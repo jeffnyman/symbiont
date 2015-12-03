@@ -7,9 +7,16 @@ require 'rspec/core/rake_task'
 RuboCop::RakeTask.new
 
 namespace :test do
-  desc 'Run the Symbiont script.'
-  task :script do
-    system('ruby ./test/symbiont-script.rb')
+  desc 'Run the Symbiont Watir script.'
+  task :watir_script do
+    system('ruby ./test/symbiont-with-watir.rb')
+  end
+end
+
+namespace :test do
+  desc 'Run the Symbiont Capybara script.'
+  task :capybara_script do
+    system('ruby ./test/symbiont-with-capybara.rb')
   end
 end
 

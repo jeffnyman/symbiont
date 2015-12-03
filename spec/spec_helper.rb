@@ -67,3 +67,17 @@ end
 Dir['spec/fixtures/**/*.rb'].each do |file|
   require file.sub(/spec\//, '')
 end
+
+class TestApp
+  def response
+    [200, { 'Content-Length' => '9' }, ['MockApp']]
+  end
+end
+
+class MockApp
+  def call(_env)
+    TestApp.new.response
+  end
+end
+
+Capybara.app = MockApp.new

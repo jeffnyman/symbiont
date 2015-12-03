@@ -30,7 +30,7 @@ Gem::Specification.new do |spec|
   spec.bindir        = 'exe'
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
-  spec.requirements  << 'Watir-WebDriver, Savon'
+  spec.requirements  << 'Watir-WebDriver, Capybara, Savon'
 
   spec.required_ruby_version     = '>= 2.0'
   spec.required_rubygems_version = '>= 1.8.29'
@@ -47,6 +47,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'watir-dom-wait'
   spec.add_runtime_dependency 'watir-scroll'
   spec.add_runtime_dependency 'savon'
+  spec.add_runtime_dependency 'capybara', ['>= 2.1', '< 3.0']
 
   spec.post_install_message = %{
 (::) (::) (::) (::) (::) (::) (::) (::) (::) (::) (::) (::)
