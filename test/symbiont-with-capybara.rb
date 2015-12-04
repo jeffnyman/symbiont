@@ -40,6 +40,8 @@ puts "Page secure? #{@page.secure?}"
 puts "Open Form Element: #{@page.open_form}"
 puts "Open Form Exists? #{@page.has_open_form?}"
 puts "Username not present? #{@page.has_no_username?}"
+puts "Username exists in DOM? #{@page.has_username?(visible: false)}"
+puts "Username Element (in DOM): #{@page.username(visible: false)}"
 
 on(Symbiote) do
   @page.open_form.click

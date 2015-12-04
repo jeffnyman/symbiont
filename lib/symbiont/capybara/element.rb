@@ -4,16 +4,16 @@ module Symbiont
   module Element
     def element(name, *identifier)
       build(name, *identifier) do
-        define_method(name.to_s) do
-          find_first(*identifier)
+        define_method(name.to_s) do |*options|
+          find_first(*identifier, *options)
         end
       end
     end
 
     def elements(name, *identifier)
       build(name, *identifier) do
-        define_method(name.to_s) do
-          find_all(*identifier)
+        define_method(name.to_s) do |*options|
+          find_all(*identifier, *options)
         end
       end
     end

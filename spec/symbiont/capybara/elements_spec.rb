@@ -5,7 +5,7 @@ RSpec.describe Symbiont::Page do
 
   it 'returns the collection object' do
     class PageWithElement < Symbiont::Page
-      element :facts, '#list'
+      elements :facts, '#list'
     end
     page = PageWithElement.new
     expect(page).to respond_to :facts
