@@ -1,4 +1,4 @@
-RSpec.describe Symbiont::Element do
+RSpec.describe Symbiont::Elements do
   include_context :page
   include_context :element
 

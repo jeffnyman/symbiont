@@ -1,8 +1,11 @@
 require 'capybara'
 
+require 'symbiont/capybara/element'
+
 module Symbiont
   class Page
     include Capybara::DSL
+    extend Element
 
     class << self
       attr_reader :url
@@ -41,6 +44,24 @@ module Symbiont
 
     def secure?
       !current_url.match(/^https/).nil?
+    end
+
+    private
+
+    def find_first(*identifier)
+      find(*identifier)
+    end
+
+    def find_all(*identifier)
+      all(*identifier)
+    end
+
+    def element_exists?(*identifier)
+      has_selector?(*identifier)
+    end
+
+    def element_does_not_exist?(*identifier)
+      has_no_selector?(*identifier)
     end
   end
 end

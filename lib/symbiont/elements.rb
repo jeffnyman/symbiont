@@ -31,7 +31,7 @@ module Symbiont
     end
   end
 
-  module Element
+  module Elements
     # Iterates through Watir factory methods. Each method is defined
     # as a method that can be called on a page class. This is what
     # allows element definitions to be created.

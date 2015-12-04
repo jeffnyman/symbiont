@@ -11,12 +11,14 @@ namespace :test do
   task :watir_script do
     system('ruby ./test/symbiont-with-watir.rb')
   end
-end
 
-namespace :test do
   desc 'Run the Symbiont Capybara script.'
   task :capybara_script do
     system('ruby ./test/symbiont-with-capybara.rb')
+  end
+
+  desc 'Run all Symbiont scripts'
+  task run_scripts: [:watir_script, :capybara_script] do
   end
 end
 

@@ -26,7 +26,7 @@ module Symbiont
   # @param caller [Class] the class including the framework
   def self.included(caller)
     caller.extend Symbiont::Assertion
-    caller.extend Symbiont::Element
+    caller.extend Symbiont::Elements
     caller.send :include, Symbiont::Pages
     caller.send :include, Symbiont::Accessor
     caller.send :include, Symbiont::DataSetter
@@ -73,6 +73,17 @@ Capybara: #{Gem.loaded_specs['capybara'].version}
     @browser = Watir::Browser.new(app, *args)
     Symbiont.browser = @browser
   end
+
+  # Configure mechanism for Capybara
+  class << self
+    attr_accessor :use_implicit_waits
+
+    def configure
+      yield self
+    end
+  end
+
+  @use_implicit_waits = false
 end
 
 def attach(mod = Symbiont)

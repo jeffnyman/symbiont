@@ -3,6 +3,8 @@ module Symbiont
     class NoUrlForDefinition < StandardError; end
     class NoUrlMatchForDefinition < StandardError; end
     class NoTitleForDefinition < StandardError; end
+    class ElementVisibleTimeout < StandardError; end
+    class ElementNonVisibleTimeout < StandardError; end
 
     class PageURLFromFactoryNotVerified < StandardError
       def message
