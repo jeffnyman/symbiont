@@ -54,3 +54,13 @@ end
 
 on_view(Stardate).facts.each { |fact| puts fact.text }
 puts "Facts count: #{@page.facts.size}"
+
+=begin
+Symbiote.new do
+  view
+  open_form.click
+  username.set 'admin'
+  password.set 'admin'
+  login.click
+end
+=end

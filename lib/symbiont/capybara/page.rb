@@ -23,6 +23,11 @@ module Symbiont
       end
     end
 
+    def initialize(&block)
+      super
+      instance_eval(&block) if block
+    end
+
     def view
       location = url
       fail Symbiont::Errors::NoUrlForDefinition if location.nil?
