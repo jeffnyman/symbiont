@@ -9,6 +9,10 @@ Capybara.configure do |config|
   config.app_host = 'http://localhost:9292'
 end
 
+class Navigation < Symbiont::Region
+  element :open, "#navlist"
+end
+
 class Symbiote < Symbiont::Page
   url_is '/'
   url_matches /:\d{4}/
@@ -17,6 +21,10 @@ class Symbiote < Symbiont::Page
   element :username, "input[id='username']"
   element :password, "input[id='password']"
   element :login,    "input[id='login-button']"
+end
+
+class Home < Symbiont::Page
+  region :navigation, Navigation, "#areas"
 end
 
 class Stardate < Symbiont::Page
@@ -51,6 +59,11 @@ on(Symbiote) do
   @page.password.set 'admin'
   @page.login.click
 end
+
+puts "Does page have region of navigation?: #{on(Home).has_navigation?}"
+on(Home).navigation.open.click
+
+puts "Region parent for navigation: #{on(Home).navigation.region_parent}"
 
 on_view(Stardate).facts.each { |fact| puts fact.text }
 puts "Facts count: #{@page.facts.size}"

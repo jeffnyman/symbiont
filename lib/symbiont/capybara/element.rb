@@ -18,6 +18,16 @@ module Symbiont
       end
     end
 
+    def region(name, *identifier)
+      region_class = identifier.shift
+
+      build(name, *identifier) do
+        define_method(name) do
+          region_class.new(self, find_first(*identifier))
+        end
+      end
+    end
+
     private
 
     def build(name, *identifier)

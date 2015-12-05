@@ -21,6 +21,7 @@ require 'symbiont/data_builder'
 require 'symbiont/service_objects'
 
 require 'symbiont/capybara/page'
+require 'symbiont/capybara/region'
 
 module Symbiont
   # @param caller [Class] the class including the framework
