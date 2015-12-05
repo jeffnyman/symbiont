@@ -29,6 +29,11 @@ module Symbiont
       visit url
     end
 
+    def perform(*args)
+      view(*args)
+      self
+    end
+
     def url
       self.class.url
     end

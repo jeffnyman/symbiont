@@ -30,6 +30,8 @@ puts Symbiont.version
 on_view(Symbiote)
 #@page = Symbiote.new
 #@page.view
+# -- or --
+#@page.perform.open_form.click
 
 puts "Page displayed? #{@page.displayed?}"
 

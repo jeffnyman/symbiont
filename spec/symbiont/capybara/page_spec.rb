@@ -84,4 +84,10 @@ RSpec.describe Symbiont::Page do
   it 'exposes the current url of the page' do
     expect(Symbiont::Page.new).to respond_to :current_url
   end
+
+  it 'allows chainable navigation and action' do
+    page = Symbiont::Page.new
+    expect(page).to receive(:view)
+    page.perform
+  end
 end

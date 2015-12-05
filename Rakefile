@@ -6,19 +6,19 @@ require 'rspec/core/rake_task'
 
 RuboCop::RakeTask.new
 
-namespace :test do
+namespace :scripts do
   desc 'Run the Symbiont Watir script.'
-  task :watir_script do
+  task :watir do
     system('ruby ./test/symbiont-with-watir.rb')
   end
 
   desc 'Run the Symbiont Capybara script.'
-  task :capybara_script do
+  task :capybara do
     system('ruby ./test/symbiont-with-capybara.rb')
   end
 
   desc 'Run all Symbiont scripts'
-  task run_scripts: [:watir_script, :capybara_script] do
+  task all: [:watir, :capybara] do
   end
 end
 
