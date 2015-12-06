@@ -90,4 +90,9 @@ RSpec.describe Symbiont::Page do
     expect(page).to receive(:view)
     page.perform
   end
+
+  it 'allows markup content to be loaded' do
+    page = Symbiont::Page.new
+    expect { page.view('<html></html>') }.not_to raise_error
+  end
 end

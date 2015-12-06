@@ -28,11 +28,17 @@ module Symbiont
       instance_eval(&block) if block
     end
 
-    def view
-      location = url
-      fail Symbiont::Errors::NoUrlForDefinition if location.nil?
-      visit url
+    def view(content = {})
+      if content.is_a?(String)
+        @page = Capybara.string(content)
+      else
+        location = url
+        fail Symbiont::Errors::NoUrlForDefinition if location.nil?
+        visit url
+      end
     end
+
+    alias_method :load, :view
 
     def perform(*args)
       view(*args)
