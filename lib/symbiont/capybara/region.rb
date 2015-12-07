@@ -1,10 +1,12 @@
 require 'capybara'
 
 require 'symbiont/capybara/element'
+require 'symbiont/capybara/region'
 
 module Symbiont
   class Region
     include Capybara::DSL
+    include Ready
     extend Element
 
     attr_reader :region_element, :region_parent

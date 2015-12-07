@@ -1,10 +1,12 @@
 require 'capybara'
 
 require 'symbiont/capybara/element'
+require 'symbiont/capybara/ready'
 
 module Symbiont
   class Page
     include Capybara::DSL
+    include Ready
     extend Element
 
     class << self
@@ -28,7 +30,13 @@ module Symbiont
       instance_eval(&block) if block
     end
 
-    def view(content = {})
+    page_ready do
+      [displayed?, "Expected #{current_url} to match #{url_matcher} but it did not."]
+    end
+
+    def view(content = {}, &block)
+      self.ready = false
+
       if content.is_a?(String)
         @page = Capybara.string(content)
       else
@@ -36,6 +44,8 @@ module Symbiont
         fail Symbiont::Errors::NoUrlForDefinition if location.nil?
         visit url
       end
+
+      when_ready(&block) if block_given?
     end
 
     alias_method :load, :view

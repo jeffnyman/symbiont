@@ -5,6 +5,7 @@ module Symbiont
     class NoTitleForDefinition < StandardError; end
     class ElementVisibleTimeout < StandardError; end
     class ElementNonVisibleTimeout < StandardError; end
+    class PageNotValidatedError < StandardError; end
 
     class PageURLFromFactoryNotVerified < StandardError
       def message

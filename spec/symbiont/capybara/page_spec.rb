@@ -95,4 +95,58 @@ RSpec.describe Symbiont::Page do
     page = Symbiont::Page.new
     expect { page.view('<html></html>') }.not_to raise_error
   end
+
+  describe 'ready?' do
+    it 'is true if displayed' do
+      page = Symbiont::Page.new
+      allow(page).to receive(:displayed?).and_return true
+      expect(page).to be_ready
+    end
+
+    it 'is false if not displayed' do
+      page = Symbiont::Page.new
+      allow(page).to receive(:displayed?).and_return false
+      expect(page).not_to be_ready
+    end
+  end
+
+  context 'when passed a block' do
+    let(:page_with_ready_validations) do
+      Class.new(Symbiont::Page) do
+        url_is '/test_page'
+
+        def is_true
+          true
+        end
+
+        def also_true
+          true
+        end
+
+        def test?
+          true
+        end
+
+        page_ready_when { [is_true, 'Was not true but should have been.'] }
+        page_ready_when { [also_true, 'Was not true but should have been.'] }
+      end
+    end
+
+    it 'executes the block actions when ready validations pass' do
+      page = page_with_ready_validations.new
+      expect { page.view { true } }.not_to raise_error
+    end
+
+    it 'yields itself to the passed block' do
+      page = page_with_ready_validations.new
+      expect(page).to receive(:test?)
+      page.view { |p| p.test? && true }
+    end
+
+    it 'raises an error when a block passed and ready validations fail' do
+      page = page_with_ready_validations.new
+      expect(page).to receive(:is_true).and_return(false)
+      expect { page.view { puts 'testing' } }.to raise_error(Symbiont::Errors::PageNotValidatedError, /Was not true/)
+    end
+  end
 end
