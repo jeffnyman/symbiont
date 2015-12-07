@@ -52,6 +52,39 @@ RSpec.describe Symbiont::Page do
         allow(page).to receive(:page).and_return(nav_element)
         expect { page.nav.open }.not_to raise_error
       end
+
+      it 'creates a matching existence method for a region' do
+        class PageRegion < Symbiont::Region
+        end
+
+        class AnotherPageWithRegion < Symbiont::Page
+          region :testing, PageRegion, '.testing'
+        end
+
+        page = AnotherPageWithRegion.new
+        expect(page).to respond_to :has_testing?
+      end
+    end
+
+    context 'second argument is not a class and a block is given' do
+      it 'should create an anonymous section with the block' do
+        class PageWithRegion < Symbiont::Page
+          region :testing, '.testing' do |item|
+            item.element :title, 'h1'
+          end
+        end
+
+        page = PageWithRegion.new
+        expect(page).to respond_to :testing
+      end
+    end
+
+    context 'second argument is not a class and no block is given' do
+      it 'should raise an ArgumentError' do
+        class Page < Symbiont::Page
+        end
+        expect { Page.region :testing, '.testing' }.to raise_error ArgumentError, 'Provide a region class either as a block or as the second argument.'
+      end
     end
   end
 end

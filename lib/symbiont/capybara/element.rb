@@ -18,12 +18,25 @@ module Symbiont
       end
     end
 
-    def region(name, *identifier)
-      region_class = identifier.shift
+    def region(name, *identifier, &block)
+      region_class, region_args = extract_region_details(identifier, &block)
 
-      build(name, *identifier) do
+      build(name, *region_args) do
         define_method(name) do
-          region_class.new(self, find_first(*identifier))
+          region_class.new(self, find_first(*region_args))
+        end
+      end
+    end
+
+    def regions(name, *identifier, &block)
+      region_class, region_args = extract_region_details(identifier, &block)
+      build(name, *region_args) do
+        define_method(name) do
+          puts "REGION ARGS: #{region_args}"
+          find_all(*region_args).map do |element|
+            puts "ELEMENT: #{element}"
+            region_class.new(self, element)
+          end
         end
       end
     end
@@ -113,6 +126,18 @@ module Symbiont
           end
         end
       end
+    end
+
+    def extract_region_details(identifier, &block)
+      if identifier.first.is_a?(Class)
+        region_class = identifier.shift
+      elsif block_given?
+        region_class = Class.new(Symbiont::Region, &block)
+      else
+        fail(ArgumentError, 'Provide a region class either as a block or as the second argument.')
+      end
+
+      [region_class, identifier]
     end
   end
 end
