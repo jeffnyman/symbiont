@@ -22,19 +22,18 @@ module Symbiont
       region_class, region_args = extract_region_details(identifier, &block)
 
       build(name, *region_args) do
-        define_method(name) do
-          region_class.new(self, find_first(*region_args))
+        define_method(name) do |*options|
+          region_class.new(self, find_first(*region_args, *options))
         end
       end
     end
 
     def regions(name, *identifier, &block)
       region_class, region_args = extract_region_details(identifier, &block)
+
       build(name, *region_args) do
-        define_method(name) do
-          puts "REGION ARGS: #{region_args}"
-          find_all(*region_args).map do |element|
-            puts "ELEMENT: #{element}"
+        define_method(name) do |*options|
+          find_all(*region_args, *options).map do |element|
             region_class.new(self, element)
           end
         end
