@@ -49,6 +49,8 @@ module Symbiont
     end
 
     alias_method :load, :view
+    alias_method :markup, :html
+    alias_method :run_script, :execute_script
 
     def perform(*args)
       view(*args)
