@@ -44,4 +44,4 @@ Rake::RDocTask.new do |rdoc|
   rdoc.rdoc_files.include('README*', 'lib/**/*.rb')
 end
 
-task default: ['spec:all', :rubocop]
+task default: ['spec:all']

@@ -25,8 +25,11 @@ Style/StringLiterals:
 Style/SignalException:
   Enabled: false
 
-Style/TrailingComma:
-  EnforcedStyleForMultiline: comma
+Style/TrailingInLiteralComma:
+  Enabled: false
+
+Style/TrailingCommaInArguments:
+  Enabled: false
 
 # this never works for validations
 Style/AlignHash:
