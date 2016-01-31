@@ -1,4 +1,5 @@
 require 'capybara'
+require 'capybara/dsl'
 
 require 'symbiont/capybara/element'
 require 'symbiont/capybara/ready'
