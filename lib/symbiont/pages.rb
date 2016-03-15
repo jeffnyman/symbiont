@@ -8,6 +8,10 @@ module Symbiont
       self
     end
 
+    def perform
+      view
+    end
+
     def has_correct_url?
       no_url_matches_is_provided if url_match.nil?
       !(browser.url =~ url_match).nil?

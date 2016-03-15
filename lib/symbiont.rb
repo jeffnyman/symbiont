@@ -60,7 +60,7 @@ Capybara: #{Gem.loaded_specs['capybara'].version}
   attr_reader :browser
 
   # @param browser [Object] a tool driver instance
-  def initialize(browser = nil)
+  def initialize(browser = nil, &block)
     Symbiont.trace("Symbiont attached to browser:\n\t#{browser.inspect}")
 
     @browser = Symbiont.browser unless Symbiont.browser.nil?
@@ -68,6 +68,8 @@ Capybara: #{Gem.loaded_specs['capybara'].version}
 
     initialize_page if respond_to?(:initialize_page)
     initialize_activity if respond_to?(:initialize_activity)
+
+    instance_eval(&block) if block
   end
 
   def self.set_browser(app = :firefox, *args)

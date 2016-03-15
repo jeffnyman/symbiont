@@ -48,6 +48,11 @@ RSpec.describe Symbiont::Pages do
   end
 
   context 'an instance of a page definition' do
+    it 'will use a perform method to reference the page' do
+      expect(watir_browser).to receive(:goto).and_return('http://localhost:9292')
+      watir_definition.perform
+    end
+
     it 'will be able to verify a page' do
       expect(watir_browser).to receive(:title).and_return('Symbiote')
       expect(watir_browser).to receive(:url).and_return('http://localhost:9292')
