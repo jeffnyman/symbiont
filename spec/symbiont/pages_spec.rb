@@ -2,6 +2,20 @@ RSpec.describe Symbiont::Pages do
   include_context :page
   include_context :element
 
+  context 'automated page ready for any page definition' do
+    it 'is true if displayed' do
+      expect(watir_browser).to receive(:url).and_return('https://localhost:9292')
+      allow(watir_definition).to receive(:displayed?).and_return true
+      expect(watir_definition).to be_ready
+    end
+
+    it 'is false if not displayed' do
+      expect(watir_browser).to receive(:url).and_return('https://localhost')
+      allow(watir_definition).to receive(:displayed?).and_return false
+      expect(watir_definition).not_to be_ready
+    end
+  end
+
   context 'a page definition being used - url' do
     it 'will establish no default url' do
       expect(empty_definition.asserted_url).to be_nil

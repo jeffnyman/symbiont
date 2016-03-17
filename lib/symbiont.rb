@@ -29,9 +29,15 @@ module Symbiont
     caller.extend Symbiont::Assertion
     caller.extend Symbiont::Elements
     caller.send :include, Symbiont::Pages
+    caller.send :include, Symbiont::Ready
     caller.send :include, Symbiont::Accessor
     caller.send :include, Symbiont::DataSetter
     caller.send :include, Symbiont::DataBuilder
+
+    caller.page_ready do
+      [displayed?, "Expected #{current_url} to match #{url_match} but it did not."]
+    end
+
     Symbiont.trace("#{caller.class} #{caller} has attached the Symbiont.")
   end
 
@@ -118,5 +124,11 @@ module Watir
   class Radio
     alias_method :choose, :set
     alias_method :chosen?, :set?
+  end
+end
+
+module Watir
+  class TextField
+    alias_method :enter, :set
   end
 end

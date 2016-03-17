@@ -2,7 +2,7 @@ require 'capybara'
 require 'capybara/dsl'
 
 require 'symbiont/capybara/element'
-require 'symbiont/capybara/ready'
+require 'symbiont/ready'
 
 module Symbiont
   class Page

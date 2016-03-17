@@ -1,10 +1,13 @@
+require 'symbiont/ready'
+
 module Symbiont
   module Pages
     include Helpers
 
-    def view
+    def view(&block)
       no_url_is_provided if asserted_url.nil?
       browser.goto(asserted_url)
+      when_ready(&block) if block_given?
       self
     end
 

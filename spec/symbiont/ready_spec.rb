@@ -1,4 +1,4 @@
-#require 'symbiont/capybara/ready'
+#require 'symbiont/ready'
 
 RSpec.describe Symbiont::Ready do
   let(:test_page) do
