@@ -5,6 +5,7 @@ RSpec.describe Symbiont::DataSetter do
   it 'will attempt to utilize data' do
     expect(watir_element).to receive(:visible?).and_return(true)
     expect(watir_element).to receive(:enabled?).and_return(true)
+    allow(watir_element).to receive(:to_subtype).and_return(watir_element)
     expect(watir_browser).to receive(:text_field).with({:id => 'text_field'}).exactly(2).times.and_return(watir_element)
     watir_definition.using(:text_field => 'works')
   end
