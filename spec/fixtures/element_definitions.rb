@@ -4,7 +4,7 @@ RSpec.shared_examples_for 'element generator for' do |elements|
     context "#{element} on the watir-webdriver platform" do
       it "will locate a specific #{element} with a single locator" do
         expect(watir_browser).to receive(element).with(id: element).and_return(watir_element)
-        allow(watir_element).to receive(:to_subtype).and_return(watir_element)
+        expect(watir_element).to receive(:to_subtype).and_return(watir_element)
         expect(watir_definition.send "#{element}").to eq(watir_element)
       end
 
@@ -26,6 +26,14 @@ RSpec.shared_examples_for 'element generator for' do |elements|
       it "will locate a specific #{element} with a block and argument" do
         expect(watir_browser).to receive(element).with(id: element).and_return(watir_element)
         expect(watir_definition.send "#{element}_block_arg", element).to eq(watir_element)
+      end
+
+      it 'will not use subtype for multiple element selector' do
+        if element == 'buttons'
+          allow(watir_element).to receive(:to_subtype) { raise NoMethodError }
+          expect(watir_browser).to receive(element).twice.with(id: element).and_return(watir_element)
+          expect(watir_definition.send "#{element}").to eq(watir_element)
+        end
       end
     end
 

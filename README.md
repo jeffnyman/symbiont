@@ -1,14 +1,14 @@
 # Symbiont
 
-[![Build Status](https://travis-ci.org/jnyman/symbiont.svg)](https://travis-ci.org/jnyman/symbiont)
 [![Gem Version](https://badge.fury.io/rb/symbiont.svg)](http://badge.fury.io/rb/symbiont)
+[![License](http://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/jnyman/symbiont/blob/master/LICENSE.txt)
+
+[![Build Status](https://travis-ci.org/jnyman/symbiont.svg)](https://travis-ci.org/jnyman/symbiont)
 [![Dependency Status](https://gemnasium.com/jnyman/symbiont.png)](https://gemnasium.com/jnyman/symbiont)
 [![Code Climate](https://codeclimate.com/github/jnyman/symbiont/badges/gpa.svg)](https://codeclimate.com/github/jnyman/symbiont)
-
-Symbiont provides a semantic domain-specific language that can be used to construct a fluent interface for test execution libraries. The initial focus will be on using the [watir-webdriver](https://github.com/watir/watir-webdriver) API as the underlying driver library.
-
 [![Gitter chat](https://badges.gitter.im/jnyman/symbiont.png)](https://gitter.im/jnyman/symbiont)
-[![endorse](https://api.coderwall.com/jnyman/endorsecount.png)](https://coderwall.com/jnyman)
+ 
+Symbiont provides a semantic domain-specific language that can be used to construct a fluent interface for test execution libraries. The initial focus will be on using the [watir-webdriver](https://github.com/watir/watir-webdriver) API as the underlying driver library.
 
 ## What is this?
 
@@ -19,7 +19,6 @@ A micro-framework provides a focused solution, which means it does one thing and
 In terms of what Symbiont does, it provides a way to describe your application in terms of activity and page definitions. Those definitions can then be referenced as part of the DSL that Symbiont provides. This DSL can be utilized in the context of the [Watir-WebDriver test library](https://github.com/watir/watir-webdriver).
 
 The DSL provides a fluent interface that can be used for constructing test execution logic. This fluent interface promotes the idea of compressibility of your test logic, allowing for more factoring, more reuse, and less repetition.
-
 
 ## Installation
 

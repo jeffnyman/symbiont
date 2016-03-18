@@ -4,23 +4,23 @@ $: << './lib'
 require 'symbiont'
 include Symbiont::Factory
 
-class Symbiote
+class Decohere
   attach Symbiont
 
-  url_is 'http://localhost:9292'
-  url_matches /:\d{4}/
+  url_is 'https://decohere.herokuapp.com/'
+  url_matches /decohere/
 
-  element :open_form, id: 'open'
+  element    :open_form, id: 'openLogin'
 
-  text_field :username, id: 'username'
-  text_field :password, id: 'password'
-  button :login, id: 'login-button'
+  text_field :username,  id: 'username'
+  text_field :password,  id: 'password'
+  button     :login,     id: 'login'
 end
 
 class Stardate
   attach Symbiont
 
-  url_is 'http://localhost:9292/stardate'
+  url_is 'https://decohere.herokuapp.com/stardate'
 
   elements :facts, css: 'ul#fact-list li a'
 end
@@ -29,9 +29,7 @@ puts Symbiont.version
 
 Symbiont.set_browser
 
-on_view(Symbiote)
-#@page = Symbiote.new
-#@page.view
+on_view(Decohere)
 
 puts "Page displayed? #{@page.displayed?}"
 
@@ -42,7 +40,7 @@ puts "Page title: #{@page.title}"
 puts "Page URL: #{@page.current_url}"
 puts "Page secure? #{@page.secure?}"
 
-on(Symbiote) do
+on(Decohere) do
   @page.open_form.click
   @page.username.set 'admin'
   @page.password.set 'admin'
