@@ -42,7 +42,7 @@ puts "Page secure? #{@page.secure?}"
 
 on(Decohere) do
   @page.open_form.click
-  @page.username.set 'admin'
+  @page.username.set 'admin@decohere.com'
   @page.password.set 'admin'
   @page.login.click
 end
