@@ -35,7 +35,7 @@ RSpec.describe Symbiont::Page do
     expect(page).to respond_to :wait_for_slow_element
   end
 
-  it 'will check elements for presence and absence' do
+  it 'checks elements for presence and absence' do
     class PageWithElement < Symbiont::Page
       element :search, '#search'
     end

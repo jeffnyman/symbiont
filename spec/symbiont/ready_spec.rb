@@ -18,7 +18,7 @@ RSpec.describe Symbiont::Ready do
   end
 
   describe 'ready validations' do
-    it 'returns the ready validations from the current and all ancestral classes in hierarchical, defined order' do
+    it 'returns the ready validations from the current and all ancestral classes in defined order' do
       subclass = Class.new(test_page)
       validation_1 = -> { true }
       validation_2 = -> { true }

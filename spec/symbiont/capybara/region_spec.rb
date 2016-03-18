@@ -67,7 +67,7 @@ RSpec.describe Symbiont::Page do
     end
 
     context 'second argument is not a class and a block is given' do
-      it 'should create an anonymous section with the block' do
+      it 'creates an anonymous section with the block' do
         class PageWithRegion < Symbiont::Page
           region :testing, '.testing' do |item|
             item.element :title, 'h1'
@@ -80,7 +80,7 @@ RSpec.describe Symbiont::Page do
     end
 
     context 'second argument is not a class and no block is given' do
-      it 'should raise an ArgumentError' do
+      it 'raises an ArgumentError' do
         class Page < Symbiont::Page
         end
         expect { Page.region :testing, '.testing' }.to raise_error ArgumentError, 'Provide a region class either as a block or as the second argument.'

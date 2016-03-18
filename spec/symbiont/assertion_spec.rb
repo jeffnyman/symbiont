@@ -1,6 +1,6 @@
 RSpec.describe Symbiont::Assertion do
   context 'a definition with valid assertions' do
-    it 'will allow a url to be asserted' do
+    it 'allows a url to be asserted' do
       expect {
         class PageWithUrl
           attach Symbiont
@@ -9,7 +9,7 @@ RSpec.describe Symbiont::Assertion do
       }.not_to raise_error
     end
 
-    it 'will allow a url match pattern to be asserted' do
+    it 'allows a url match pattern to be asserted' do
       expect {
         class PageWithUrlMatches
           attach Symbiont
@@ -18,7 +18,7 @@ RSpec.describe Symbiont::Assertion do
       }.not_to raise_error
     end
 
-    it 'will allow a title to be asserted' do
+    it 'allows a title to be asserted' do
       expect {
         class PageWithTitle
           attach Symbiont
@@ -29,7 +29,7 @@ RSpec.describe Symbiont::Assertion do
   end
 
   context 'a definition with missing assertion values' do
-    it 'will indicate a missing url_is assertion value' do
+    it 'indicates a missing url_is assertion value' do
       expect {
         class PageWithMissingUrl
           attach Symbiont
@@ -38,7 +38,7 @@ RSpec.describe Symbiont::Assertion do
       }.to raise_error Symbiont::Errors::NoUrlForDefinition
     end
 
-    it 'will indicate an empty url_is assertion value' do
+    it 'indicates an empty url_is assertion value' do
       expect {
         class PageWithEmptyUrl
           attach Symbiont
@@ -47,7 +47,7 @@ RSpec.describe Symbiont::Assertion do
       }.to raise_error Symbiont::Errors::NoUrlForDefinition
     end
 
-    it 'will indicate a missing url_matches assertion value' do
+    it 'indicates a missing url_matches assertion value' do
       expect {
         class PageWithMissingUrlMatch
           attach Symbiont
@@ -56,7 +56,7 @@ RSpec.describe Symbiont::Assertion do
       }.to raise_error Symbiont::Errors::NoUrlMatchForDefinition
     end
 
-    it 'will indicate an empty url_matches assertion value' do
+    it 'indicates an empty url_matches assertion value' do
       expect {
         class PageWithEmptyUrlMatch
           attach Symbiont
@@ -65,7 +65,7 @@ RSpec.describe Symbiont::Assertion do
       }.to raise_error Symbiont::Errors::NoUrlMatchForDefinition
     end
 
-    it 'will indicate a missing title_is assertion value' do
+    it 'indicates a missing title_is assertion value' do
       expect {
         class PageWithMissingTitle
           attach Symbiont
@@ -74,7 +74,7 @@ RSpec.describe Symbiont::Assertion do
       }.to raise_error Symbiont::Errors::NoTitleForDefinition
     end
 
-    it 'will indicate an empty title_is assertion value' do
+    it 'indicates an empty title_is assertion value' do
       expect {
         class PageWithEmptyTitle
           attach Symbiont
