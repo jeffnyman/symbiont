@@ -44,9 +44,10 @@ You can also install Symbiont just as you would any other gem:
 
 To learn how to use the framework, you can check out my [blog posts on Symbiont](http://testerstories.com/category/symbiont/) and for the most up to date information, you can check out the [Symbiont Wiki](https://github.com/jnyman/symbiont/wiki).
 
-You can check out the [Symbiont test script](https://github.com/jnyman/symbiont/blob/master/test/symbiont-script.rb) for an idea of how the library can be interacted with. Do note that the test script requires a local copy of [Symbiote](https://github.com/jnyman/symbiote) to be running. To execute the test script:
+You can check out the [Symbiont Watir test script](https://github.com/jnyman/symbiont/blob/master/test/symbiont-with-watir.rb) or the [Symbiont Capybara test script](https://github.com/jnyman/symbiont/blob/master/test/symbiont-with-capybara.rb) for an idea of how the library can be interacted with. Do note that the test scripts will use my [Decohere](http://decohere.herokuapp.com/) web application. To execute the test scripts, do one of the following:
 
-    $ rake test:script
+    $ rake scripts:watir
+    $ rake scripts:capybara
 
 ## Why call it Symbiont?
 
