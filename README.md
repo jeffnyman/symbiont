@@ -1,7 +1,7 @@
 # Symbiont
 
 [![Gem Version](https://badge.fury.io/rb/symbiont.svg)](http://badge.fury.io/rb/symbiont)
-[![License](http://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/jnyman/symbiont/blob/master/LICENSE.txt)
+[![License](http://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/jeffnyman/symbiont/blob/master/LICENSE.txt)
 
 [![Build Status](https://travis-ci.org/jnyman/symbiont.svg)](https://travis-ci.org/jnyman/symbiont)
 [![Dependency Status](https://gemnasium.com/jnyman/symbiont.png)](https://gemnasium.com/jnyman/symbiont)
@@ -29,7 +29,7 @@ To get the latest stable release, add this line to your application's Gemfile:
 To get the latest code:
 
 ```ruby
-gem 'symbiont', git: https://github.com/jnyman/symbiont
+gem 'symbiont', git: https://github.com/jeffnyman/symbiont
 ```
 
 After doing one of the above, execute the following command:
@@ -42,9 +42,9 @@ You can also install Symbiont just as you would any other gem:
 
 ## Usage
 
-To learn how to use the framework, you can check out my [blog posts on Symbiont](http://testerstories.com/category/symbiont/) and for the most up to date information, you can check out the [Symbiont Wiki](https://github.com/jnyman/symbiont/wiki).
+To learn how to use the framework, you can check out my [blog posts on Symbiont](http://testerstories.com/category/symbiont/) and for the most up to date information, you can check out the [Symbiont Wiki](https://github.com/jeffnyman/symbiont/wiki).
 
-You can check out the [Symbiont Watir test script](https://github.com/jnyman/symbiont/blob/master/test/symbiont-with-watir.rb) or the [Symbiont Capybara test script](https://github.com/jnyman/symbiont/blob/master/test/symbiont-with-capybara.rb) for an idea of how the library can be interacted with. Do note that the test scripts will use my [Decohere](http://decohere.herokuapp.com/) web application. To execute the test scripts, do one of the following:
+You can check out the [Symbiont Watir test script](https://github.com/jeffnyman/symbiont/blob/master/test/symbiont-with-watir.rb) or the [Symbiont Capybara test script](https://github.com/jeffnyman/symbiont/blob/master/test/symbiont-with-capybara.rb) for an idea of how the library can be interacted with. Do note that the test scripts will use my [Decohere](http://decohere.herokuapp.com/) web application. To execute the test scripts, do one of the following:
 
     $ rake scripts:watir
     $ rake scripts:capybara
@@ -61,7 +61,7 @@ So, with that bit of context, think of this library as a facultative, endosymbio
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at [https://github.com/jnyman/symbiont](https://github.com/jnyman/symbiont). The testing ecosystem of Ruby is very large and this project is intended to be a welcoming arena for collaboration on yet another testing tool. As such, contributors are very much welcome but are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at [https://github.com/jeffnyman/symbiont](https://github.com/jeffnyman/symbiont). The testing ecosystem of Ruby is very large and this project is intended to be a welcoming arena for collaboration on yet another testing tool. As such, contributors are very much welcome but are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 To contribute to Symbiont:
 
@@ -78,7 +78,7 @@ To contribute to Symbiont:
 ## License
 
 Symbiont is distributed under the [MIT](http://www.opensource.org/licenses/MIT) license.
-See the [LICENSE](https://github.com/jnyman/symbiont/blob/master/LICENSE.txt) file for details.
+See the [LICENSE](https://github.com/jeffnyman/symbiont/blob/master/LICENSE.txt) file for details.
 
 ## Credits
 
