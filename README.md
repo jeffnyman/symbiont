@@ -14,7 +14,7 @@ Symbiont provides a semantic domain-specific language that can be used to constr
 
 Symbiont is a test solution micro-framework.
 
-A micro-framework provides a focused solution, which means it does one thing and one thing only, instead of trying to solve each and every problem. While doing that one thing it does well, the micro-framework should do it while being expressive yet concise. Further, it should be able to serve as one component of your own custom modularized framework, allowing you to compose solutions. To that end, you can use Symbiont directly as an automated test library or you can use it with other tools such as [RSpec](http://rspec.info/), [Cucumber](http://cukes.info/), or my own [Specify](https://github.com/jnyman/specify) tool.
+A micro-framework provides a focused solution, which means it does one thing and one thing only, instead of trying to solve each and every problem. While doing that one thing it does well, the micro-framework should do it while being expressive yet concise. Further, it should be able to serve as one component of your own custom modularized framework, allowing you to compose solutions. To that end, you can use Symbiont directly as an automated test library or you can use it with other tools such as [RSpec](http://rspec.info/), [Cucumber](http://cukes.info/), or my own [Specify](https://github.com/jeffnyman/specify) tool.
 
 In terms of what Symbiont does, it provides a way to describe your application in terms of activity and page definitions. Those definitions can then be referenced as part of the DSL that Symbiont provides. This DSL can be utilized in the context of the [Watir-WebDriver test library](https://github.com/watir/watir-webdriver).
 
