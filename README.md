@@ -1,7 +1,7 @@
 # Symbiont
 
 ---
-**NOTE:** Symbiont is now framed as [Tapesty](https://github.com/jeffnyman/tapestry). It has the exact same API but a lot more clean code and is more amenable to being used with my other test solutions. I recommend looking at Tapestry rather than Symbiont as I'm hoping to continue primary work with the new gem.
+**NOTE:** Symbiont is now framed as [Tapestry](https://github.com/jeffnyman/tapestry). It has the exact same API but a lot more clean code and is more amenable to being used with my other test solutions. I recommend looking at Tapestry rather than Symbiont as I'm hoping to continue primary work with the new gem.
 ---
 
 [![Gem Version](https://badge.fury.io/rb/symbiont.svg)](http://badge.fury.io/rb/symbiont)
