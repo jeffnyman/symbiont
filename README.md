@@ -1,5 +1,7 @@
 # Symbiont
 
+NOTE: Symbiont is now framed as [Tapesty](https://github.com/jeffnyman/tapestry). It has the exact same interface but a lot more clean code and is more amenable to being used with my other test solutions.
+
 [![Gem Version](https://badge.fury.io/rb/symbiont.svg)](http://badge.fury.io/rb/symbiont)
 [![License](http://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/jeffnyman/symbiont/blob/master/LICENSE.txt)
 
